@@ -3,6 +3,7 @@ package com.example.alessandro.computergraphicsexample;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
+import android.opengl.Matrix;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,8 @@ public class GraphicsRenderer implements Renderer {
     private ShadingProgram program;
     private Context context;
     private ArrayList<Node> nodes = new ArrayList<>();
+    private float[] projection = new float[16];
+
 
     public GraphicsRenderer(Context context) {
         this.context = context;
@@ -94,6 +97,9 @@ public class GraphicsRenderer implements Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
 
+        float ratio = (float) width / height;
+
+        //Matrix.frustumM(projection, 0, -ratio, ratio, -1f, 1f, 1f, 100f);
     }
 
     @Override
@@ -103,12 +109,8 @@ public class GraphicsRenderer implements Renderer {
 
         for (int i=0; i<nodes.size(); i++) {
             //setup the View Projection
-            float[] projection={
-                    1,0,0,0,
-                    0,1,0,0,
-                    0,0,1,0,
-                    0,0,0,1,
-            };
+
+            Matrix.setIdentityM(projection, 0);
             program.setupProjection(projection);
 
             //Change the Node transform
