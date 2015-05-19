@@ -32,6 +32,7 @@ public class GraphicsView extends GLSurfaceView{
     public GraphicsView(Context context) {
         super(context);
         setEGLContextClientVersion(2);
+        setPreserveEGLContextOnPause(true);
         this.context=context;
         setRenderer(new GraphicsRenderer(context));
     }

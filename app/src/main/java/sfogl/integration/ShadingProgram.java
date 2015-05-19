@@ -14,6 +14,7 @@ public class ShadingProgram implements SFInitiable{
 	
 	public static final int PROJECTION_POSITION=0;
 	public static final int MODELVIEW_POSITION=1;
+	public static final int VIEW_POSITION = 3;
 
 	public static final int VERTICES_INDEX=0;
 	public static final int NORMALS_INDEX=1;
@@ -52,6 +53,7 @@ public class ShadingProgram implements SFInitiable{
 		uniformNames.add("projection");
 		uniformNames.add("transform");
 		uniformNames.add("vTransform");
+		uniformNames.add("uViewMatrix");
 		
 		ArrayList<Integer> textures=new ArrayList<Integer>();
 
@@ -80,6 +82,12 @@ public class ShadingProgram implements SFInitiable{
 	public void setupProjection(float projection[]){
 		shader.setUniformValue(PROJECTION_POSITION, projection);
 	}
+
+	public void setViewMatrix(float viewMatrix[]){
+		shader.setUniformValue(VIEW_POSITION, viewMatrix);
+	}
+
+
 	
 	public void setData(SFValue[] data) {
 		for (int i=0; i < data.length; i++) {

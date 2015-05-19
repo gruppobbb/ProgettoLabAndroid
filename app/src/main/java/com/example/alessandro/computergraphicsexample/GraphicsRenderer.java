@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import model.mobs.Mob;
 import objLoader.ObjLoader;
 import sfogl.integration.ArrayObject;
 import sfogl.integration.BitmapTexture;
@@ -36,6 +37,7 @@ public class GraphicsRenderer implements Renderer {
     private Context context;
     private ArrayList<Node> nodes = new ArrayList<>();
     private float[] projection = new float[16];
+    private float[] viewMatrix = new float[16];
 
 
     public GraphicsRenderer(Context context) {
@@ -45,12 +47,32 @@ public class GraphicsRenderer implements Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
+        Matrix.setIdentityM(viewMatrix, 0);
+
+        float eyeX = 0;
+        float eyeY = 0;
+        float eyeZ = 1;
+        float centerX = 0;
+        float centerY = 0;
+        float centerZ = 0;
+        float upX = 0;
+        float upY = 1;
+        float upZ = 0;
+
+        Matrix.setLookAtM(
+                viewMatrix, 0,
+                eyeX, eyeY, eyeZ,
+                centerX, centerY, centerZ,
+                upX, upY, upZ
+        );
+
+
         Model model1 = loadModel("MonkeyTxN.obj", R.drawable.paddedroomtexture01);
 
         //Step 6: create a Node, that is a reference system where you can place your Model
         Node node=new Node();
         node.setModel(model1);
-        node.getRelativeTransform().setPosition(0, 0, 0);
+        node.getRelativeTransform().setPosition(0, 0, -5);
 
         nodes.add(node);
 
@@ -58,7 +80,7 @@ public class GraphicsRenderer implements Renderer {
 
         Node anotherNode=new Node();
         anotherNode.setModel(model2);
-        anotherNode.getRelativeTransform().setPosition(1, 1, 0);
+        anotherNode.getRelativeTransform().setPosition(1, 1, -5);
         anotherNode.getRelativeTransform().setMatrix(SFMatrix3f.getScale(0.3f, 0.2f, 0.1f));
         node.getSonNodes().add(anotherNode);
 
@@ -99,24 +121,26 @@ public class GraphicsRenderer implements Renderer {
 
         float ratio = (float) width / height;
 
-        //Matrix.frustumM(projection, 0, -ratio, ratio, -1f, 1f, 1f, 100f);
+        Matrix.setIdentityM(projection, 0);
+        Matrix.frustumM(projection, 0, -ratio, ratio, -1f, 1f, 1f, 100f);
     }
+
 
     @Override
     public void onDrawFrame(GL10 gl) {
 
-        SFOGLSystemState.cleanupColorAndDepth(1, 1, 0, 1);
+        SFOGLSystemState.cleanupColorAndDepth(0, 0, 0, 1);
 
         for (int i=0; i<nodes.size(); i++) {
             //setup the View Projection
-
-            Matrix.setIdentityM(projection, 0);
             program.setupProjection(projection);
+            program.setViewMatrix(viewMatrix);
 
             //Change the Node transform
             t+=0.01f;
             float rotation=0.2f+t;
-            float scaling=0.3f;
+            float scaling=1.0f;
+
             SFMatrix3f matrix3f=SFMatrix3f.getScale(scaling,scaling,scaling);
             matrix3f=matrix3f.MultMatrix(SFMatrix3f.getRotationX(rotation));
             nodes.get(i).getRelativeTransform().setMatrix(matrix3f);

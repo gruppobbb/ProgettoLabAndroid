@@ -45,4 +45,6 @@ public class ShadersKeeper {
     private static ShadingParameter pTextureNormal=new ShadingParameter("textureNormal", ShadingParameter.ParameterType.GLOBAL_TEXTURE);
     private static ShadingParameter pTextureHigh=new ShadingParameter("textureHigh", ShadingParameter.ParameterType.GLOBAL_TEXTURE);
 
+
+
 }

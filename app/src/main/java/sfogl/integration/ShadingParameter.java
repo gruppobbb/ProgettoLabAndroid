@@ -1,6 +1,5 @@
 package sfogl.integration;
 
-
 public class ShadingParameter {
 
 	public enum ParameterType{
