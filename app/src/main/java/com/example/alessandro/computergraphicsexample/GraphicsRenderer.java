@@ -32,7 +32,6 @@ import static android.opengl.GLSurfaceView.Renderer;
  */
 public class GraphicsRenderer implements Renderer {
 
-    private float t=0;
     private ShadingProgram program;
     private Context context;
     private ArrayList<Node> nodes = new ArrayList<>();
@@ -131,15 +130,12 @@ public class GraphicsRenderer implements Renderer {
 
         SFOGLSystemState.cleanupColorAndDepth(0, 0, 0, 1);
 
+        program.setupProjection(projection);
+        program.setViewMatrix(viewMatrix);
+
+
         for (int i=0; i<nodes.size(); i++) {
             //setup the View Projection
-            program.setupProjection(projection);
-            program.setViewMatrix(viewMatrix);
-
-            //Change the Node transform
-            t+=0.01f;
-            float rotation=0.2f+t;
-            float scaling=1.0f;
 
             SFMatrix3f matrix3f=SFMatrix3f.getScale(scaling,scaling,scaling);
             matrix3f=matrix3f.MultMatrix(SFMatrix3f.getRotationX(rotation));

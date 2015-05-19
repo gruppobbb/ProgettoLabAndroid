@@ -1,19 +1,20 @@
 package model3D;
 
-import android.mtp.MtpObjectInfo;
 import android.opengl.Matrix;
 
 import model.Coordinate;
 import model.mobs.Mob;
+import model.movement.Moveable;
 
 /**
- * Created by Max on 19/05/2015.
+ * Modello di mob rappresentato in uno spazio tridimensionale.
+ * @author Max
+ * @author Jan
  */
-public class Mob3D extends Mob {
+public class Mob3D extends Mob implements Moveable{
 
     private float[] modelMatrix = new float[16];
     private boolean needUpdate;
-
 
     public Mob3D(Coordinate coordinate, float shiftAmount) {
         super(coordinate, shiftAmount);
@@ -23,9 +24,19 @@ public class Mob3D extends Mob {
     public float[] getModelMatrix() {
         if(needUpdate) {
             Matrix.setIdentityM(modelMatrix, 0);
-            Matrix.translateM(modelMatrix, 0, getCoordinate().getX(), getCoordinate().getY(), getCoordinate().getZ());
+            Matrix.translateM(modelMatrix, 0,
+                    getCoordinate().getX(),
+                    getCoordinate().getY(),
+                    getCoordinate().getZ());
+            needUpdate = false;
         }
         return modelMatrix;
     }
 
+    @Override
+    public void move() {
+        Coordinate coord = getCoordinate();
+        coord.setZ(coord.getZ() + getShiftAmount());
+        needUpdate = true;
+    }
 }
