@@ -17,7 +17,7 @@ public class Mob3D extends Mob implements Moveable{
 
     private SFMatrix3f matrix3f;
     private float scale;
-    private float angle;
+    private float angle[] = new float[3];
     private boolean needUpdate;
 
     /**
@@ -31,7 +31,9 @@ public class Mob3D extends Mob implements Moveable{
 
         //default
         scale = 1.0f;
-        angle = 0.0f;
+        angle[0] = 0.0f;    //TODO: Su blender la scimmia è fatta al contrario, bisogna ruotare il modello.
+        angle[1] = (float)Math.PI;
+        angle[2] = 0.0f;
 
         needUpdate = true;
     }
@@ -39,16 +41,20 @@ public class Mob3D extends Mob implements Moveable{
 
     public SFMatrix3f getModelMatrix() {
         if(needUpdate) {
-
             //TODO: Con questo risolviamo il "POP-UP" del mob, appena possibile vi spiego come.
             //Creazione della matrice di scala.
             SFMatrix3f scaleMatrix=SFMatrix3f.getScale(scale, scale, scale);
 
             //creazione della matrice di rotazione
-            SFMatrix3f rotationMatrix = SFMatrix3f.getRotationX(angle);
+            SFMatrix3f rotationMatrixX = SFMatrix3f.getRotationX(angle[0]);
+            SFMatrix3f rotationMatrixY = SFMatrix3f.getRotationY(angle[1]);
+            SFMatrix3f rotationMatrixZ = SFMatrix3f.getRotationZ(angle[2]);
+
+            SFMatrix3f totalRotation = rotationMatrixX.MultMatrix(rotationMatrixY);
+            totalRotation = totalRotation.MultMatrix(rotationMatrixZ);
 
             //Salvataggio della matrice risultante dal prodotto delle due precedenti.
-            matrix3f = scaleMatrix.MultMatrix(rotationMatrix);
+            matrix3f = scaleMatrix.MultMatrix(totalRotation);
 
             needUpdate = false;
         }

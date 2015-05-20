@@ -25,7 +25,6 @@ import sfogl.integration.ShadingProgram;
 import sfogl2.SFOGLSystemState;
 import sfogl2.SFOGLTextureModel;
 import shadow.graphics.SFImageFormat;
-import shadow.math.SFMatrix3f;
 import shadow.math.SFTransform3f;
 
 import static android.opengl.GLSurfaceView.Renderer;
@@ -83,17 +82,12 @@ public class GraphicsRenderer implements Renderer {
         shipNode.setModel(shipModel);
         //TODO: Posizionamento della ship alla partenza fatto da costruttore in Ship3D.
         //TODO: Fare Ship3D.
-        // shipNode.getRelativeTransform().setPosition(0, 0, -5);
 
 
 
-        Model mobsModel = loadModel("MonkeyTxN.obj", R.drawable.paddedroomtexture01);
+        Model mobsModel = loadModel("SuzanneTextured.obj", R.drawable.suzanne_manual_texture);
         mobsNode = new Node();
         mobsNode.setModel(mobsModel);
-
-        //TODO: queste le fa lo spawner quando genera un Mob3D
-        //mobsNode.getRelativeTransform().setPosition(1, 1, -5);
-        //mobsNode.getRelativeTransform().setMatrix(SFMatrix3f.getScale(0.3f, 0.2f, 0.1f));
 
     }
 

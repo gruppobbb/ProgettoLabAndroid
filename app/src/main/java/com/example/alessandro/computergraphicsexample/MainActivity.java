@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
 
         MobsManager mobsManager = new MobsManager();
 
-        mobsManager.addMob(new Mob3D(new Coordinate(0.0f, 0.0f, -5.0f), 0.0f));
+        mobsManager.addMob(new Mob3D(new Coordinate(0.0f, 0.0f, -1.0f), 0.0f));
 
 
         graphicsView = new GraphicsView(this);
