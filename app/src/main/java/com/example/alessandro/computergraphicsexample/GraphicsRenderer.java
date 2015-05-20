@@ -59,7 +59,7 @@ public class GraphicsRenderer implements Renderer {
 
         float eyeX = 0;
         float eyeY = 0;
-        float eyeZ = 1;
+        float eyeZ = 5;
         float centerX = 0;
         float centerY = 0;
         float centerZ = 0;
@@ -128,7 +128,7 @@ public class GraphicsRenderer implements Renderer {
 
         float ratio = (float) width / height;
         Matrix.setIdentityM(projection, 0);
-        Matrix.frustumM(projection, 0, -ratio, ratio, -1f, 1f, 1f, 100f);
+        Matrix.frustumM(projection, 0, -ratio, ratio, -1f, 1f, 3f, 100f);
 
     }
 

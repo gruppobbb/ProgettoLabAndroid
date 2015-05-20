@@ -61,6 +61,31 @@ public class Mob3D extends Mob implements Moveable{
         return matrix3f;
     }
 
+    public void setAngle(float angleX, float angleY, float angleZ) {
+        angle[0] = angleX;
+        angle[1] = angleY;
+        angle[2] = angleZ;
+        needUpdate = true;
+    }
+
+    public void shiftAngle(float shiftAngleX, float shiftAngleY, float shiftAngleZ) {
+        angle[0] = angle[0] + shiftAngleX;
+        angle[1] = angle[1] + shiftAngleY;
+        angle[2] = angle[2] + shiftAngleZ;
+        needUpdate = true;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
+    public void shiftScale(float shiftScale) {
+        if(scale + shiftScale > 0){
+            scale = scale + shiftScale;
+            needUpdate = true;
+        }
+    }
+
 
 
     @Override

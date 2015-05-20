@@ -3,6 +3,9 @@ package com.example.alessandro.computergraphicsexample;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import model.Coordinate;
 import model.MobsManager;
 import model3D.Mob3D;
@@ -18,7 +21,16 @@ public class MainActivity extends Activity {
 
         MobsManager mobsManager = new MobsManager();
 
-        mobsManager.addMob(new Mob3D(new Coordinate(0.0f, 0.0f, -1.0f), 0.0f));
+        final Mob3D test = new Mob3D(new Coordinate(0.0f, 0.0f, -1.0f), 0.0f);
+        mobsManager.addMob(test);
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                test.shiftAngle(0.0f, (float)Math.PI/180f, 0.0f);
+            }
+        }, 17, 17);
 
 
         graphicsView = new GraphicsView(this);
