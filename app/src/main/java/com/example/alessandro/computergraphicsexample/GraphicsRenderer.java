@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import model.Coordinate;
+import model.MobsManager;
 import model.mobs.Mob;
+import model3D.Mob3D;
 import objLoader.ObjLoader;
 import sfogl.integration.ArrayObject;
 import sfogl.integration.BitmapTexture;
@@ -28,20 +31,27 @@ import shadow.math.SFTransform3f;
 import static android.opengl.GLSurfaceView.Renderer;
 
 /**
- * Created by Max on 12/05/2015.
+ * Renderer che si occupa delle chiamate draw verso OpenGLES per ogni Mob e per la ship.
+ *
+ * @author Max
+ * @author Jan
  */
 public class GraphicsRenderer implements Renderer {
 
     private ShadingProgram program;
     private Context context;
-    private ArrayList<Node> nodes = new ArrayList<>();
+    private MobsManager mobsManager;
     private float[] projection = new float[16];
     private float[] viewMatrix = new float[16];
 
+    private Node shipNode;
+    private Node mobsNode;
 
-    public GraphicsRenderer(Context context) {
+    public GraphicsRenderer(Context context, MobsManager mobsManager) {
         this.context = context;
+        this.mobsManager = mobsManager;
     }
+
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -66,30 +76,31 @@ public class GraphicsRenderer implements Renderer {
         );
 
 
-        Model model1 = loadModel("MonkeyTxN.obj", R.drawable.paddedroomtexture01);
+        Model shipModel = loadModel("MonkeyTxN.obj", R.drawable.paddedroomtexture01);
 
         //Step 6: create a Node, that is a reference system where you can place your Model
-        Node node=new Node();
-        node.setModel(model1);
-        node.getRelativeTransform().setPosition(0, 0, -5);
+        shipNode = new Node();
+        shipNode.setModel(shipModel);
+        //TODO: Posizionamento della ship alla partenza fatto da costruttore in Ship3D.
+        //TODO: Fare Ship3D.
+        // shipNode.getRelativeTransform().setPosition(0, 0, -5);
 
-        nodes.add(node);
 
-        Model model2 = loadModel("MonkeyTxN.obj", R.drawable.paddedroomtexture01);
 
-        Node anotherNode=new Node();
-        anotherNode.setModel(model2);
-        anotherNode.getRelativeTransform().setPosition(1, 1, -5);
-        anotherNode.getRelativeTransform().setMatrix(SFMatrix3f.getScale(0.3f, 0.2f, 0.1f));
-        node.getSonNodes().add(anotherNode);
+        Model mobsModel = loadModel("MonkeyTxN.obj", R.drawable.paddedroomtexture01);
+        mobsNode = new Node();
+        mobsNode.setModel(mobsModel);
 
-        nodes.add(anotherNode);
+        //TODO: queste le fa lo spawner quando genera un Mob3D
+        //mobsNode.getRelativeTransform().setPosition(1, 1, -5);
+        //mobsNode.getRelativeTransform().setMatrix(SFMatrix3f.getScale(0.3f, 0.2f, 0.1f));
+
     }
 
     private Model loadModel(String modelPath, int textureID) {
         //Step 1 : load Shading effects
         ShadersKeeper.loadPipelineShaders(context);
-        program= ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER);
+        program = ShadersKeeper.getProgram(ShadersKeeper.STANDARD_TEXTURE_SHADER);
 
         //Step 2 : load Textures
         int textureModel= SFOGLTextureModel.generateTextureObjectModel(SFImageFormat.RGB,
@@ -118,10 +129,13 @@ public class GraphicsRenderer implements Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
 
-        float ratio = (float) width / height;
+        //Generazione della ProjectionMAtrix per la correzzione delle coordinate in proporzione
+        // alle dimensioni della surface.
 
+        float ratio = (float) width / height;
         Matrix.setIdentityM(projection, 0);
         Matrix.frustumM(projection, 0, -ratio, ratio, -1f, 1f, 1f, 100f);
+
     }
 
 
@@ -130,20 +144,28 @@ public class GraphicsRenderer implements Renderer {
 
         SFOGLSystemState.cleanupColorAndDepth(0, 0, 0, 1);
 
+        //setup the Projection e View matrix
         program.setupProjection(projection);
         program.setViewMatrix(viewMatrix);
 
+        //caricamento dei mobs attivi
+        ArrayList<Mob> mobs = mobsManager.getMobsList();
 
-        for (int i=0; i<nodes.size(); i++) {
-            //setup the View Projection
+        for(Mob mob : mobs ){
 
-            SFMatrix3f matrix3f=SFMatrix3f.getScale(scaling,scaling,scaling);
-            matrix3f=matrix3f.MultMatrix(SFMatrix3f.getRotationX(rotation));
-            nodes.get(i).getRelativeTransform().setMatrix(matrix3f);
-            nodes.get(i).updateTree(new SFTransform3f());
+            //Posizionamento del mob
+            Coordinate coord = mob.getCoordinate();
+            mobsNode.getRelativeTransform().setPosition(coord.getX(), coord.getY(), coord.getZ());
 
-            //Draw the node
-            nodes.get(i).draw();
+            //Trasformazione del mob
+            mobsNode.getRelativeTransform().setMatrix(((Mob3D) mob).getModelMatrix());
+
+            //TODO: Aggiornamento dei nodi figli ?, serve?...
+            mobsNode.updateTree(new SFTransform3f());
+
+            //Disegno del nodo, nella posizione e con la trasformazione indicta dal Mob attuale
+            mobsNode.draw();
+
         }
 
         //int[] viewport=new int[4];

@@ -27,14 +27,10 @@ import shadow.math.SFTransform3f;
  */
 public class GraphicsView extends GLSurfaceView{
 
-    private Context context;
-
     public GraphicsView(Context context) {
         super(context);
         setEGLContextClientVersion(2);
         setPreserveEGLContextOnPause(true);
-        this.context=context;
-        setRenderer(new GraphicsRenderer(context));
     }
 
 

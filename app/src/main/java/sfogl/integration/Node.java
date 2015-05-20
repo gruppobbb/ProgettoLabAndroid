@@ -13,25 +13,25 @@ public class Node {
 	protected SFTransform3f effeciveTransform;
 	private boolean enabled;
 	private Model model;
-	
+
 	public void setup(){
-	    relativeTransform=new SFTransform3f();
-	    effeciveTransform=new SFTransform3f();
-	    sonNodes=new ArrayList<Node>();
-	    model=null;
-	    enabled=true;
+		relativeTransform=new SFTransform3f();
+		effeciveTransform=new SFTransform3f();
+		sonNodes=new ArrayList<Node>();
+		model=null;
+		enabled=true;
 	}
-	
-	
+
+
 	public Node(){
 	    setup();
 	}
-	
+
 	public Node(SFTransform3f relativeTransform){
 	    setup();
 	    this.relativeTransform=relativeTransform;
 	}
-	
+
 	public Node clodeNode(){
         SFTransform3f transform=new SFTransform3f();
         transform.set(getRelativeTransform());
@@ -41,13 +41,13 @@ public class Node {
         }
         return node;
     }
-	
+
 	public Node(SFTransform3f relativeTransform,Model model){
 	    setup();
 	    this.relativeTransform=relativeTransform;
 	    this.model=model;
 	}
-	
+
 	public float getX(){
 	    return this.effeciveTransform.getV()[9];
 	}

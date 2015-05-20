@@ -17,9 +17,11 @@ public class SFMatrix3f extends SFValue{
 	}
 	
 	public SFMatrix3f(float[] values){
-		getV()[0]=1;
-		getV()[4]=1;
-		getV()[8]=1;
+		getV()[0]=values[0];
+		getV()[4]=values[4];
+		getV()[8]=values[8];
+		//Fixed
+
 	}
 
 	public SFMatrix3f(float a, float b, float c, float d, float e, float f, float g, float h, float i) {
