@@ -15,7 +15,7 @@ import javax.microedition.khronos.opengles.GL10;
 import model.Coordinate;
 import model.MobsManager;
 import model.mobs.Mob;
-import library.model3D.Mob3D;
+import model3D.Mob3D;
 import library.objLoader.ObjLoader;
 import library.integration.ArrayObject;
 import library.integration.BitmapTexture;
@@ -28,7 +28,6 @@ import library.sfogl2.SFOGLSystemState;
 import library.sfogl2.SFOGLTextureModel;
 import library.shadow.graphics.SFImageFormat;
 import library.shadow.math.SFTransform3f;
-import view.ShadersKeeper;
 
 import static android.opengl.GLSurfaceView.Renderer;
 

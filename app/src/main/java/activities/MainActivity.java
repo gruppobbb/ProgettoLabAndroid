@@ -11,7 +11,7 @@ import java.util.TimerTask;
 
 import model.Coordinate;
 import model.MobsManager;
-import library.model3D.Mob3D;
+import model3D.Mob3D;
 
 
 public class MainActivity extends Activity {
