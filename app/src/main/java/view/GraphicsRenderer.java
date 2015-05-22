@@ -171,16 +171,7 @@ public class GraphicsRenderer extends Observable implements Renderer {
 
         }
 
-        Coordinate coord = ship.getCoordinate();
-        shipNode.getRelativeTransform().setPosition(coord.getX(), coord.getY(), coord.getZ());
 
-        shipNode.getRelativeTransform().setMatrix(ship.getModelMatrix());
-
-        shipNode.updateTree(new SFTransform3f());
-
-        shipNode.draw();
-
-        //Log.d();
 
 
     }

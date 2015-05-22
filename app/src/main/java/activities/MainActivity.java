@@ -47,20 +47,21 @@ public class MainActivity extends Activity {
         renderer.addObserver(controller);
 
 
-
-        SpawnLogic spawnLogic = new SimpleSpawnLogic(45.0f, 45.0f, -95.0f);
+        //SPAWNING
+        SpawnLogic spawnLogic = new SimpleSpawnLogic(20.0f, 20.0f, -95.0f);
         Spawner spawner = new Spawner(mobsManager, spawnLogic);
         spawner.setSleepTime(500);
 
         (new Thread(spawner)).start();
 
 
+        //GAME ENGINE
+        GameEngine gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -3));
+        (new Thread((gameEngine))).start();
+
 
         graphicsView.setRenderer(renderer);
         setContentView(graphicsView);
-
-
-
     }
 
 
