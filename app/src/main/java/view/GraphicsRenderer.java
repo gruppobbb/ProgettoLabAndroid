@@ -8,6 +8,7 @@ import android.opengl.Matrix;
 import com.example.alessandro.computergraphicsexample.R;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -37,13 +38,14 @@ import static android.opengl.GLSurfaceView.Renderer;
  * @author Max
  * @author Jan
  */
-public class GraphicsRenderer implements Renderer {
+public class GraphicsRenderer extends Observable implements Renderer {
 
     private ShadingProgram program;
     private Context context;
     private MobsManager mobsManager;
     private float[] projection = new float[16];
     private float[] viewMatrix = new float[16];
+    private int width, height;
 
     private Node shipNode;
     private Node mobsNode;
@@ -127,6 +129,10 @@ public class GraphicsRenderer implements Renderer {
         Matrix.setIdentityM(projection, 0);
         Matrix.frustumM(projection, 0, -ratio, ratio, -1f, 1f, 3f, 100f);
 
+        this.width = width;
+        this.height = height;
+        setChanged();
+        notifyObservers();
     }
 
     @Override
@@ -157,7 +163,13 @@ public class GraphicsRenderer implements Renderer {
             mobsNode.draw();
 
         }
+    }
 
+    public int getWidth() {
+        return width;
+    }
 
+    public int getHeight() {
+        return height;
     }
 }

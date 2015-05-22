@@ -3,6 +3,8 @@ package activities;
 import android.app.Activity;
 import android.os.Bundle;
 
+import model.mobs.Mob;
+import model.spawning.SpawnLogic;
 import view.GraphicsRenderer;
 import view.GraphicsView;
 
@@ -24,25 +26,12 @@ public class MainActivity extends Activity {
 
         MobsManager mobsManager = new MobsManager();
 
-        final Mob3D test = new Mob3D(new Coordinate(0.0f, 5.0f, -1.0f), 0.0f);
-        mobsManager.addMob(test);
-
-        final Mob3D test2 = new Mob3D(new Coordinate(0.0f, -5.0f, -5.0f), 0.0f);
-        mobsManager.addMob(test2);
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-
-                test.shiftAngle(0.0f, (float)Math.PI/180f, 0.0f);
-            }
-        }, 17, 17);
-
 
         graphicsView = new GraphicsView(this);
         graphicsView.setRenderer(new GraphicsRenderer(this, mobsManager));
         setContentView(graphicsView);
+
+
     }
 
     @Override
