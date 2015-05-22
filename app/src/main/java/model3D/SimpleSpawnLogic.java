@@ -2,28 +2,36 @@ package model3D;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
+import model.Coordinate;
 import model.mobs.Mob;
 import model.spawning.SpawnLogic;
 
 /**
- * Created by Max on 22/05/2015.
+ * @author Max
  */
-public class SimpleSpawnLogic implements SpawnLogic, Observer  {
+public class SimpleSpawnLogic implements SpawnLogic  {
 
-    private float upperBound;
-    private float lowerBound;
-    private float rightBound;
-    private float leftBound;
+    private float widthBound;
+    private float heightBound;
+    private float initialZ;
+    private Random r = new Random();
 
+    public SimpleSpawnLogic(float widthBound, float heightBound, float initialZ) {
+        this.widthBound = widthBound;
+        this.heightBound = heightBound;
+        this.initialZ = initialZ;
+    }
 
     @Override
     public Mob[] spawnMob() {
-        return new Mob[0];
+        Mob[] mob = new Mob[1];
+        Coordinate newMobCoord = new Coordinate(r.nextFloat() * heightBound * 2 - heightBound, r.nextFloat() * widthBound * 2 - widthBound, initialZ);
+        mob[0] = new Mob3D(newMobCoord, 0.1f);
+
+        return mob;
     }
 
-    @Override
-    public void update(Observable observable, Object data) {
 
-    }
 }

@@ -3,8 +3,12 @@ package activities;
 import android.app.Activity;
 import android.os.Bundle;
 
+import model.GameEngine;
 import model.mobs.Mob;
 import model.spawning.SpawnLogic;
+import model.spawning.Spawner;
+import model3D.Ship3D;
+import model3D.SimpleSpawnLogic;
 import view.GraphicsRenderer;
 import view.GraphicsView;
 
@@ -30,6 +34,14 @@ public class MainActivity extends Activity {
         graphicsView = new GraphicsView(this);
         graphicsView.setRenderer(new GraphicsRenderer(this, mobsManager));
         setContentView(graphicsView);
+
+
+        SpawnLogic spawnLogic = new SimpleSpawnLogic(45.0f, 45.0f, -95.0f);
+        Spawner spawner = new Spawner(mobsManager, spawnLogic);
+        spawner.setSleepTime(500);
+
+        (new Thread(spawner)).start();
+
 
 
     }
