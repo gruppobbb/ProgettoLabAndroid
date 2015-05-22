@@ -1,4 +1,4 @@
-package library.model3D;
+package model3D;
 
 import model.Coordinate;
 import model.mobs.Mob;
@@ -36,27 +36,30 @@ public class Mob3D extends Mob implements Moveable{
         needUpdate = true;
     }
 
-
     public SFMatrix3f getModelMatrix() {
         if(needUpdate) {
-            //TODO: Con questo risolviamo il "POP-UP" del mob, appena possibile vi spiego come.
-            //Creazione della matrice di scala.
-            SFMatrix3f scaleMatrix=SFMatrix3f.getScale(scale, scale, scale);
-
-            //creazione della matrice di rotazione
-            SFMatrix3f rotationMatrixX = SFMatrix3f.getRotationX(angle[0]);
-            SFMatrix3f rotationMatrixY = SFMatrix3f.getRotationY(angle[1]);
-            SFMatrix3f rotationMatrixZ = SFMatrix3f.getRotationZ(angle[2]);
-
-            SFMatrix3f totalRotation = rotationMatrixX.MultMatrix(rotationMatrixY);
-            totalRotation = totalRotation.MultMatrix(rotationMatrixZ);
-
-            //Salvataggio della matrice risultante dal prodotto delle due precedenti.
-            matrix3f = scaleMatrix.MultMatrix(totalRotation);
+            updateModelMatrix();
 
             needUpdate = false;
         }
         return matrix3f;
+    }
+
+    private void updateModelMatrix(){
+        //TODO: Con questo risolviamo il "POP-UP" del mob, appena possibile vi spiego come.
+        //Creazione della matrice di scala.
+        SFMatrix3f scaleMatrix=SFMatrix3f.getScale(scale, scale, scale);
+
+        //creazione della matrice di rotazione
+        SFMatrix3f rotationMatrixX = SFMatrix3f.getRotationX(angle[0]);
+        SFMatrix3f rotationMatrixY = SFMatrix3f.getRotationY(angle[1]);
+        SFMatrix3f rotationMatrixZ = SFMatrix3f.getRotationZ(angle[2]);
+
+        SFMatrix3f totalRotation = rotationMatrixX.MultMatrix(rotationMatrixY);
+        totalRotation = totalRotation.MultMatrix(rotationMatrixZ);
+
+        //Salvataggio della matrice risultante dal prodotto delle due precedenti.
+        matrix3f = scaleMatrix.MultMatrix(totalRotation);
     }
 
     public void setAngle(float angleX, float angleY, float angleZ) {
@@ -83,8 +86,6 @@ public class Mob3D extends Mob implements Moveable{
             needUpdate = true;
         }
     }
-
-
 
     @Override
     public void move() {

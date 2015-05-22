@@ -1,4 +1,4 @@
-package library.model3D;
+package model3D;
 
 import model.Coordinate;
 
