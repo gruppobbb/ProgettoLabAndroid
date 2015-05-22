@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.alessandro.computergraphicsexample.R;
 
@@ -29,6 +31,7 @@ import library.sfogl2.SFOGLSystemState;
 import library.sfogl2.SFOGLTextureModel;
 import library.shadow.graphics.SFImageFormat;
 import library.shadow.math.SFTransform3f;
+import model3D.Ship3D;
 
 import static android.opengl.GLSurfaceView.Renderer;
 
@@ -43,6 +46,8 @@ public class GraphicsRenderer extends Observable implements Renderer {
     private ShadingProgram program;
     private Context context;
     private MobsManager mobsManager;
+    private Ship3D ship;
+
     private float[] projection = new float[16];
     private float[] viewMatrix = new float[16];
     private int width, height;
@@ -50,9 +55,11 @@ public class GraphicsRenderer extends Observable implements Renderer {
     private Node shipNode;
     private Node mobsNode;
 
-    public GraphicsRenderer(Context context, MobsManager mobsManager) {
+    public GraphicsRenderer(Context context, @NonNull MobsManager mobsManager, Ship3D ship) {
         this.context = context;
         this.mobsManager = mobsManager;
+        this.ship = ship;
+
     }
 
 
@@ -79,7 +86,7 @@ public class GraphicsRenderer extends Observable implements Renderer {
         );
 
 
-        Model shipModel = loadModel("MonkeyTxN.obj", R.drawable.paddedroomtexture01);
+        Model shipModel = loadModel("tempShip.obj", R.drawable.suzanne_manual_texture);
         //Step 6: create a Node, that is a reference system where you can place your Model
         shipNode = new Node();
         shipNode.setModel(shipModel);
@@ -163,6 +170,19 @@ public class GraphicsRenderer extends Observable implements Renderer {
             mobsNode.draw();
 
         }
+
+        Coordinate coord = ship.getCoordinate();
+        shipNode.getRelativeTransform().setPosition(coord.getX(), coord.getY(), coord.getZ());
+
+        shipNode.getRelativeTransform().setMatrix(ship.getModelMatrix());
+
+        shipNode.updateTree(new SFTransform3f());
+
+        shipNode.draw();
+
+        //Log.d();
+
+
     }
 
     public int getWidth() {

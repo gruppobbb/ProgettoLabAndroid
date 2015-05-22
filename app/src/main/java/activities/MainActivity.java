@@ -2,10 +2,13 @@ package activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Surface;
 
+import control.ShipController;
 import model.GameEngine;
 import model.mobs.Mob;
 import model.spawning.SpawnLogic;
+import model3D.Ship3D;
 import model.spawning.Spawner;
 import model3D.Ship3D;
 import model3D.SimpleSpawnLogic;
@@ -23,17 +26,26 @@ import model3D.Mob3D;
 public class MainActivity extends Activity {
 
     private GraphicsView graphicsView;
+    private GraphicsRenderer renderer;
+    private MobsManager mobsManager;
+
+    private Ship3D ship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        MobsManager mobsManager = new MobsManager();
-
-
         graphicsView = new GraphicsView(this);
-        graphicsView.setRenderer(new GraphicsRenderer(this, mobsManager));
-        setContentView(graphicsView);
+
+        mobsManager = new MobsManager();
+
+        ship = new Ship3D(0.0f, 0.0f, -10.0f);
+
+        ShipController controller = new ShipController(ship, 0.1f);
+        graphicsView.setOnTouchListener(controller);
+
+        renderer = new GraphicsRenderer(this, mobsManager, ship );
+        renderer.addObserver(controller);
+
 
 
         SpawnLogic spawnLogic = new SimpleSpawnLogic(45.0f, 45.0f, -95.0f);
@@ -44,7 +56,13 @@ public class MainActivity extends Activity {
 
 
 
+        graphicsView.setRenderer(renderer);
+        setContentView(graphicsView);
+
+
+
     }
+
 
     @Override
     protected void onPause() {

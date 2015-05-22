@@ -1,7 +1,6 @@
 package model3D;
 
 
-import android.opengl.Matrix;
 
 import library.shadow.math.SFMatrix3f;
 import model.Coordinate;
