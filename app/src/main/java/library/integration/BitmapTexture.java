@@ -1,0 +1,65 @@
+package library.integration;
+
+import android.graphics.Bitmap;
+
+import library.sfogl2.SFOGLTexture2D;
+import library.shadow.graphics.SFBitmap;
+import library.shadow.graphics.SFImageFormat;
+import library.shadow.system.SFInitiable;
+
+public class BitmapTexture implements SFInitiable {
+
+	private SFOGLTexture2D texture;
+	private SFBitmap bitmap;
+	private int textureModel;
+	
+	public BitmapTexture(SFBitmap bitmap,int textureModel) {
+		super();
+		this.bitmap = bitmap;
+		this.textureModel=textureModel;
+	}
+
+	public SFOGLTexture2D getTexture() {
+		return texture;
+	}
+
+	public void setTexture(SFOGLTexture2D texture) {
+		this.texture = texture;
+	}
+	
+	@Override
+	public void destroy() {
+		
+	}
+	
+	@Override
+	public void init() {
+		texture=new SFOGLTexture2D(textureModel);
+		texture.setup( bitmap);
+	}
+
+
+    public static BitmapTexture loadBitmapTexture(Bitmap image,int textureModel){
+
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        int[] values=new int[width*height*3];
+        int index=0;
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                int color=image.getPixel(i, j);
+                values[index]=(color & 0xff0000)>>16;
+                index++;
+                values[index]=(color & 0xff00)>>8;
+                index++;
+                values[index]=(color & 0xff);
+                index++;
+            }
+        }
+
+        SFBitmap bitmap=new SFBitmap();
+        bitmap.generateBitmap(width, height, values, SFImageFormat.RGB);
+        return new BitmapTexture(bitmap,textureModel);
+    }
+}
