@@ -27,6 +27,11 @@ public class NewVersionActivity extends Activity {
     private GameSurface surface;
     private GameRenderer renderer;
 
+    private Spawner spawner;
+    private GameEngine gameEngine;
+    private Thread spawnerThread;
+    private Thread gameEngineThread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +54,13 @@ public class NewVersionActivity extends Activity {
         final MobsManager mobsManager = new MobsManager();
 
         SpawnLogic spawnLogic = new AlternativeSimpleSpawnLogic(45.0f, 45.0f, -95.0f);
-        Spawner spawner = new Spawner(mobsManager, spawnLogic);
-        spawner.setSleepTime(100);
-
-        (new Thread(spawner)).start();
+        spawner = new Spawner(mobsManager, spawnLogic);
+        spawner.setSleepTime(50);
+        spawnerThread = new Thread(spawner);
 
         //GAME ENGINE
-        GameEngine gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -3));
-        (new Thread((gameEngine))).start();
+        gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -3));
+        gameEngineThread = new Thread(gameEngine);
 
 
         Light sunLight = new Light(new Coordinate(0.0f, 20.0f, 20.0f));
@@ -65,6 +69,9 @@ public class NewVersionActivity extends Activity {
         renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
         surface.setRenderer(renderer);
 
+
+        spawnerThread.start();
+        gameEngineThread.start();
 
         /*
         Timer timer = new Timer();
@@ -88,4 +95,28 @@ public class NewVersionActivity extends Activity {
         setContentView(surface);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        gameEngine.onResume();
+        spawner.onResume();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        spawner.onPause();
+        gameEngine.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        spawner.setToKill(true);
+        gameEngine.setToKill(true);
+    }
 }
