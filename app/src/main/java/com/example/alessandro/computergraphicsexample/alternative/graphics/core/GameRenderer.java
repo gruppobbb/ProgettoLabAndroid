@@ -72,6 +72,8 @@ public class GameRenderer implements GLSurfaceView.Renderer{
         //Controllo della profondità per il rendering dei vertici.
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
+        //GLES20.glDisable(GLES20.GL_BLEND);
+
         //TODO: fare qui l'iniializzaione di modelli.
 
         initModels();

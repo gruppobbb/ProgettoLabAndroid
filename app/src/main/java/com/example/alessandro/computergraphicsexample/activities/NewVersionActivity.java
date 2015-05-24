@@ -1,8 +1,10 @@
 package com.example.alessandro.computergraphicsexample.activities;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.os.Bundle;
 
+import com.example.alessandro.computergraphicsexample.alternative.control.FreeTouchController;
 import com.example.alessandro.computergraphicsexample.alternative.engine.AlternativeSimpleSpawnLogic;
 import com.example.alessandro.computergraphicsexample.alternative.entities.AlternativeShip3D;
 import com.example.alessandro.computergraphicsexample.alternative.entities.GameCamera;
@@ -69,27 +71,12 @@ public class NewVersionActivity extends Activity {
         renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
         surface.setRenderer(renderer);
 
+        Rect bound = new Rect(-15, 10, 15, -10);
+        surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 1.0f));
 
-        spawnerThread.start();
-        gameEngineThread.start();
 
-        /*
-        Timer timer = new Timer();
-
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                //ship.shiftAngle(0.0f, 1.0f, 0.0f);
-                ArrayList<Mob> mobs = mobsManager.getMobsList();
-
-                for(Mob mob: mobs){
-                    ((Moveable)mob).move();
-                }
-
-            }
-        }, 17 ,17);
-
-        */
+        //spawnerThread.start();
+        //gameEngineThread.start();
 
 
         setContentView(surface);

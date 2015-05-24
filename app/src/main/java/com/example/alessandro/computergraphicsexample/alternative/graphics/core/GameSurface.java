@@ -88,4 +88,16 @@ public class GameSurface extends GLSurfaceView {
         }
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+    }
 }

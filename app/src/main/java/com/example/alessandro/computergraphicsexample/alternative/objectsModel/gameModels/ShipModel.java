@@ -19,7 +19,7 @@ public class ShipModel extends Model {
 
         this.context = context;
 
-        setShineDamper(10.0f);
+        setShineDamper(2.0f);
 
         setReflectivity(1.0f);
     }
