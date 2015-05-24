@@ -75,8 +75,25 @@ public class NewVersionActivity extends Activity {
         surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 1.0f));
 
 
-        //spawnerThread.start();
-        //gameEngineThread.start();
+        spawnerThread.start();
+        gameEngineThread.start();
+
+        //Temporaneo, in attesa del fix al GameEngine.
+
+        Timer cleanTimer = new Timer();
+
+        cleanTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                ArrayList<Mob> mobs = mobsManager.getMobsList();
+                for(Mob mob : mobs){
+                    Coordinate coord = mob.getCoordinate();
+                    if( coord.getZ() > 0 ){
+                        mobsManager.removeMob(mob);
+                    }
+                }
+            }
+        }, 1000, 1000);
 
 
         setContentView(surface);
