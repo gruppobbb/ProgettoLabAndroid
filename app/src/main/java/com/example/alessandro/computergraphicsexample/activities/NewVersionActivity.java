@@ -15,6 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import model.Coordinate;
+import model.GameEngine;
 import model.MobsManager;
 import model.mobs.Mob;
 import model.movement.Moveable;
@@ -53,6 +54,10 @@ public class NewVersionActivity extends Activity {
 
         (new Thread(spawner)).start();
 
+        //GAME ENGINE
+        GameEngine gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -3));
+        (new Thread((gameEngine))).start();
+
 
         Light sunLight = new Light(new Coordinate(0.0f, 20.0f, 20.0f));
 
@@ -60,6 +65,8 @@ public class NewVersionActivity extends Activity {
         renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
         surface.setRenderer(renderer);
 
+
+        /*
         Timer timer = new Timer();
 
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -74,6 +81,8 @@ public class NewVersionActivity extends Activity {
 
             }
         }, 17 ,17);
+
+        */
 
 
         setContentView(surface);

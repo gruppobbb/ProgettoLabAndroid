@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.alessandro.computergraphicsexample.oldVersion.control.ShipController;
 
+import model.Coordinate;
 import model.GameEngine;
 import model.spawning.SpawnLogic;
 import com.example.alessandro.computergraphicsexample.model3D.Ship3D;
