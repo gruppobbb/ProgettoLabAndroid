@@ -61,7 +61,7 @@ public class NewVersionActivity extends Activity {
         spawnerThread = new Thread(spawner);
 
         //GAME ENGINE
-        gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -3));
+        gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -2));
         gameEngineThread = new Thread(gameEngine);
 
 
@@ -74,27 +74,8 @@ public class NewVersionActivity extends Activity {
         Rect bound = new Rect(-15, 10, 15, -10);
         surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 1.0f));
 
-
         spawnerThread.start();
         gameEngineThread.start();
-
-        //Temporaneo, in attesa del fix al GameEngine.
-
-        Timer cleanTimer = new Timer();
-
-        cleanTimer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                ArrayList<Mob> mobs = mobsManager.getMobsList();
-                for(Mob mob : mobs){
-                    Coordinate coord = mob.getCoordinate();
-                    if( coord.getZ() > 0 ){
-                        mobsManager.removeMob(mob);
-                    }
-                }
-            }
-        }, 1000, 1000);
-
 
         setContentView(surface);
     }
