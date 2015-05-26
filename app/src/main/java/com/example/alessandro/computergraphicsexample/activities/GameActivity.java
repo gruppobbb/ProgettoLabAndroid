@@ -9,6 +9,7 @@ import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.audio.AudioManager;
 import com.example.alessandro.computergraphicsexample.game3D.audio.AudioPlayer;
 import com.example.alessandro.computergraphicsexample.game3D.control.FreeTouchController;
+import com.example.alessandro.computergraphicsexample.game3D.engine.MoreDenseSpawnLogic;
 import com.example.alessandro.computergraphicsexample.game3D.engine.SimpleSpawnLogic;
 import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
 import com.example.alessandro.computergraphicsexample.game3D.entities.GameCamera;
@@ -65,7 +66,8 @@ public class GameActivity extends Activity implements Observer {
 
         final MobsManager mobsManager = new MobsManager();
 
-        SpawnLogic spawnLogic = new SimpleSpawnLogic(20.0f, 10.0f, -50f);
+        //SpawnLogic spawnLogic = new SimpleSpawnLogic(20.0f, 10.0f, -50f);
+        SpawnLogic spawnLogic = new MoreDenseSpawnLogic(ship, -60f);
         spawner = new Spawner(mobsManager, spawnLogic);
         spawner.setSleepTime(200);
         spawnerThread = new Thread(spawner);
@@ -83,7 +85,7 @@ public class GameActivity extends Activity implements Observer {
         renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
         surface.setRenderer(renderer);
 
-        Rect bound = new Rect(-4, -1, 4, 4);
+        Rect bound = new Rect(-4, 0, 4, 4);
         surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 0.08f));
 
         spawnerThread.start();
