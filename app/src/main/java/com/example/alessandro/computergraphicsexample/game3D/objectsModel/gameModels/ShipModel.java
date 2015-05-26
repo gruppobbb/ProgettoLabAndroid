@@ -15,7 +15,7 @@ public class ShipModel extends Model {
 
     public ShipModel(Context context) {
 
-        super("MyShip_H.obj", "debug.jpg");
+        super("newship.obj", "debug.jpg");
 
         this.context = context;
 

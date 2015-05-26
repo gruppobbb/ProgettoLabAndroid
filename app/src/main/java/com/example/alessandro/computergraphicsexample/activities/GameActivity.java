@@ -1,6 +1,7 @@
 package com.example.alessandro.computergraphicsexample.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 
@@ -12,13 +13,16 @@ import com.example.alessandro.computergraphicsexample.game3D.entities.Light;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameRenderer;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameSurface;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import model.Coordinate;
 import model.GameEngine;
 import model.MobsManager;
 import model.spawning.SpawnLogic;
 import model.spawning.Spawner;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements Observer {
 
     private GameSurface surface;
     private GameRenderer renderer;
@@ -59,7 +63,9 @@ public class GameActivity extends Activity {
         //GAME ENGINE
         gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -2));
         //gameEngine.setDebugMode(true);
+        gameEngine.addObserver(this);
         gameEngineThread = new Thread(gameEngine);
+
 
         Light sunLight = new Light(new Coordinate(0.0f, 20.0f, 20.0f));
 
@@ -82,6 +88,7 @@ public class GameActivity extends Activity {
 
         gameEngine.onResume();
         spawner.onResume();
+
     }
 
     @Override
@@ -98,5 +105,14 @@ public class GameActivity extends Activity {
 
         spawner.setToKill(true);
         gameEngine.setToKill(true);
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+
+        finish();
+
+        Intent intent = new Intent(this, GameMenu.class);
+        startActivity(intent);
     }
 }

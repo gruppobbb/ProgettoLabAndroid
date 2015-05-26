@@ -15,7 +15,7 @@ public class MobsModel extends Model {
 
     public MobsModel(Context context) {
 
-        super("SuzanneTextured.obj", "suzanne_manual_texture.png");
+        super("mobship.obj", "gold.jpg");
 
         this.context = context;
 
