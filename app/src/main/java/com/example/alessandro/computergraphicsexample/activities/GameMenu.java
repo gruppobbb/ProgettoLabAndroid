@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
 import com.example.alessandro.computergraphicsexample.R;
-import com.example.alessandro.computergraphicsexample.activities.NewVersionActivity;
 
 /**
  * @author Jancarlos.
@@ -26,7 +25,7 @@ public class GameMenu extends ActionBarActivity {
         switch (view.getId()) {
 
             case R.id.new_version_button:
-                intent = new Intent(this, NewVersionActivity.class);
+                intent = new Intent(this, GameActivity.class);
                 break;
 
             default: return;

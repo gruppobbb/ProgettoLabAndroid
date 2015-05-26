@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.NewVersionActivity"
+            android:name=".activities.GameActivity"
             android:label="@string/title_activity_new_version"
             android:parentActivityName=".activities.GameMenu"
             android:screenOrientation="landscape" >

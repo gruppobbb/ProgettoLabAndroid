@@ -18,7 +18,7 @@ import model.MobsManager;
 import model.spawning.SpawnLogic;
 import model.spawning.Spawner;
 
-public class NewVersionActivity extends Activity {
+public class GameActivity extends Activity {
 
     private GameSurface surface;
     private GameRenderer renderer;
@@ -32,20 +32,21 @@ public class NewVersionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, -5.0f);
+        Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, -3.0f);
         final Ship3D ship = new Ship3D(shipCoordinate);
         ship.setCollisionRay(5.0);
+        ship.setScale(0.4f);
         //ship.setAngle(0.0f, 180.0f, 0.0f);
 
         Coordinate cameraCoordinate = new Coordinate(
                 shipCoordinate.getX(),
-                shipCoordinate.getY()+5,
+                shipCoordinate.getY()+2,
                 shipCoordinate.getZ()
                 );
 
         //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), shipCoordinate );
         //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), new Coordinate(0,0,0) );
-        GameCamera camera = new GameCamera(new Coordinate(0.0f, 10.0f, 10.0f), cameraCoordinate );
+        GameCamera camera = new GameCamera(new Coordinate(0.0f, 2.0f, 5.0f), cameraCoordinate );
 
 
         final MobsManager mobsManager = new MobsManager();
@@ -59,7 +60,6 @@ public class NewVersionActivity extends Activity {
         gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -2));
         //gameEngine.setDebugMode(true);
         gameEngineThread = new Thread(gameEngine);
-
 
         Light sunLight = new Light(new Coordinate(0.0f, 20.0f, 20.0f));
 
@@ -82,7 +82,6 @@ public class NewVersionActivity extends Activity {
 
         gameEngine.onResume();
         spawner.onResume();
-
     }
 
     @Override

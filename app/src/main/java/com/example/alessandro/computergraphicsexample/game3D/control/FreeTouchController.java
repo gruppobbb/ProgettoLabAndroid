@@ -49,9 +49,8 @@ public class FreeTouchController implements View.OnTouchListener {
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         mDensity = displayMetrics.density;
 
-
         cDelay = 17;
-        shiftScale = 0.5f;
+        shiftScale = 0.15f;
 
         cTimer = new Timer();
         cTimer.scheduleAtFixedRate(new TimerTask() {

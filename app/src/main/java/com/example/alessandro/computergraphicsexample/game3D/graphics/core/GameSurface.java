@@ -88,7 +88,6 @@ public class GameSurface extends GLSurfaceView {
         }
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
