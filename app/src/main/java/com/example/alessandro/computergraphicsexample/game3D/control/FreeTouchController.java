@@ -36,6 +36,13 @@ public class FreeTouchController implements View.OnTouchListener {
     private long cDelay;
     private float shiftScale;
 
+    /**
+     * Crea un controllo touch per una ship con una velocita' massima di maxModulo ( deve essere minore di 0.08 ).
+     * @param activity activity in cui viene utilizzato il controllo
+     * @param ship3D ship da controllare
+     * @param bound limiti del controllo
+     * @param maxModulo velocita' massima
+     */
     public FreeTouchController(Activity activity, Ship3D ship3D, Rect bound, float maxModulo) {
         this.ship3D = ship3D;
         minX = bound.left;
@@ -44,7 +51,11 @@ public class FreeTouchController implements View.OnTouchListener {
         minY = bound.top;
         maxY = bound.bottom;
 
-        this.maxModulo = maxModulo;
+        if(maxModulo > 0){
+            this.maxModulo = maxModulo;
+        }else{
+            this.maxModulo = 0.08f;
+        }
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -53,7 +64,7 @@ public class FreeTouchController implements View.OnTouchListener {
 
 
         cDelay = 17;
-        shiftScale = 0.08f;
+        shiftScale = 0.015f;
 
         cTimer = new Timer();
         cTimer.scheduleAtFixedRate(new TimerTask() {
@@ -83,15 +94,9 @@ public class FreeTouchController implements View.OnTouchListener {
 
             case MotionEvent.ACTION_MOVE: {
 
-                deltaX =  chackDelta(-(startX - motionEvent.getX()) / mDensity / 2f);
+                deltaX =  chackDelta((-(startX - motionEvent.getX()) / mDensity / 2f ) * shiftScale );
 
-                deltaY = chackDelta((startY - motionEvent.getY()) / mDensity / 2f);
-
-                //moveShip();
-
-                Log.d(TAG, "Data:\n start x: "+ startX + " startY: " + startY
-                        + " actualX: "+ motionEvent.getX() + "actualY: "+ motionEvent.getY()
-                        +" deltaX: "+ deltaX + " deltaY: " + deltaY );
+                deltaY = chackDelta(((startY - motionEvent.getY()) / mDensity / 2f) * shiftScale);
 
                 break;
 
@@ -109,8 +114,8 @@ public class FreeTouchController implements View.OnTouchListener {
 
     private void moveShip(){
         Coordinate coord = ship3D.getCoordinate();
-        float scaledDeltaX = deltaX * shiftScale;
-        float scaledDetlaY = deltaY * shiftScale;
+        float scaledDeltaX = deltaX;
+        float scaledDetlaY = deltaY;
         if(coord.getX() + scaledDeltaX < minX || coord.getX() + scaledDeltaX > maxX ){
             scaledDeltaX = 0;
         }
@@ -127,6 +132,9 @@ public class FreeTouchController implements View.OnTouchListener {
             float sign = Math.signum(delta);
             delta = sign * maxModulo;
         }
+
+
+        Log.d(TAG, "Data:\n"+ delta);
         return delta;
     }
 }

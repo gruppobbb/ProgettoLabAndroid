@@ -72,7 +72,7 @@ public class GameActivity extends Activity implements Observer {
         surface.setRenderer(renderer);
 
         Rect bound = new Rect(-4, -1, 4, 4);
-        surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 1.0f));
+        surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 0.08f));
 
         spawnerThread.start();
         gameEngineThread.start();
