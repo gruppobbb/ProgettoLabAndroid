@@ -37,6 +37,5 @@ void main() {
 
     //gl_FragColor = diffuse * color + vec4(finalSpecular, 1.0);
     gl_FragColor = diffuse * texture2D(u_TextureUnit, v_TextureCoordinates) + vec4(finalSpecular, 1.0);
-    //gl_FragColor = diffuse * texture2D(u_TextureUnit, v_TextureCoordinates) + vec4(finalSpecular, 1.0);
 
 }

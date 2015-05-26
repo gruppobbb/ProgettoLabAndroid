@@ -31,12 +31,12 @@ public class SimpleSpawnLogic implements SpawnLogic  {
     @Override
     public Mob[] spawnMob() {
         Mob[] mob = new Mob[1];
-        Coordinate newMobCoord = new Coordinate(r.nextFloat() * heightBound * 2 - heightBound, r.nextFloat() * widthBound * 2 - widthBound, initialZ);
+        Coordinate newMobCoord = new Coordinate( r.nextFloat() * widthBound * 2 - widthBound, r.nextFloat() * heightBound * 2 - heightBound, initialZ);
         mob[0] = new Mob3D(newMobCoord, mobSpeed);
-        mob[0].setCollisionRay(5.0);
+        mob[0].setCollisionRay(0.5);
 
         if(mobSpeed < MAX_MOB_SPEED) {
-            mobSpeed += 0.002f;
+            mobSpeed += 0.0001f;
         }
 
         return mob;

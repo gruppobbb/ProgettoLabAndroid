@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
 
 import java.util.Timer;
@@ -40,8 +41,8 @@ public class FreeTouchController implements View.OnTouchListener {
         minX = bound.left;
         maxX = bound.right;
 
-        minY = bound.bottom;
-        maxY = bound.top;
+        minY = bound.top;
+        maxY = bound.bottom;
 
         this.maxModulo = maxModulo;
 
@@ -49,8 +50,10 @@ public class FreeTouchController implements View.OnTouchListener {
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         mDensity = displayMetrics.density;
 
+
+
         cDelay = 17;
-        shiftScale = 0.15f;
+        shiftScale = 0.08f;
 
         cTimer = new Timer();
         cTimer.scheduleAtFixedRate(new TimerTask() {

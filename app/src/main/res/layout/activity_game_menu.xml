@@ -8,13 +8,6 @@
             tools:context="com.example.alessandro.computergraphicsexample.activities.GameMenu">
 
     <Button
-        android:id="@+id/old_version_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Old Version"
-        android:onClick="openVersion"/>
-
-    <Button
         android:id="@+id/new_version_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
