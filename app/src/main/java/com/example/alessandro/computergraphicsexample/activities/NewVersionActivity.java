@@ -4,23 +4,17 @@ import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 
-import com.example.alessandro.computergraphicsexample.alternative.control.FreeTouchController;
-import com.example.alessandro.computergraphicsexample.alternative.engine.AlternativeSimpleSpawnLogic;
-import com.example.alessandro.computergraphicsexample.alternative.entities.AlternativeShip3D;
-import com.example.alessandro.computergraphicsexample.alternative.entities.GameCamera;
-import com.example.alessandro.computergraphicsexample.alternative.entities.Light;
-import com.example.alessandro.computergraphicsexample.alternative.graphics.core.GameRenderer;
-import com.example.alessandro.computergraphicsexample.alternative.graphics.core.GameSurface;
-
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import com.example.alessandro.computergraphicsexample.game3D.control.FreeTouchController;
+import com.example.alessandro.computergraphicsexample.game3D.engine.SimpleSpawnLogic;
+import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
+import com.example.alessandro.computergraphicsexample.game3D.entities.GameCamera;
+import com.example.alessandro.computergraphicsexample.game3D.entities.Light;
+import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameRenderer;
+import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameSurface;
 
 import model.Coordinate;
 import model.GameEngine;
 import model.MobsManager;
-import model.mobs.Mob;
-import model.movement.Moveable;
 import model.spawning.SpawnLogic;
 import model.spawning.Spawner;
 
@@ -39,7 +33,7 @@ public class NewVersionActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, -5.0f);
-        final AlternativeShip3D ship = new AlternativeShip3D(shipCoordinate);
+        final Ship3D ship = new Ship3D(shipCoordinate);
         ship.setCollisionRay(5.0);
         //ship.setAngle(0.0f, 180.0f, 0.0f);
 
@@ -56,7 +50,7 @@ public class NewVersionActivity extends Activity {
 
         final MobsManager mobsManager = new MobsManager();
 
-        SpawnLogic spawnLogic = new AlternativeSimpleSpawnLogic(45.0f, 45.0f, -95.0f);
+        SpawnLogic spawnLogic = new SimpleSpawnLogic(45.0f, 45.0f, -95.0f);
         spawner = new Spawner(mobsManager, spawnLogic);
         spawner.setSleepTime(200);
         spawnerThread = new Thread(spawner);

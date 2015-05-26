@@ -25,10 +25,6 @@ public class GameMenu extends ActionBarActivity {
 
         switch (view.getId()) {
 
-            case R.id.old_version_button:
-                intent = new Intent(this, OldVersionActivity.class);
-                break;
-
             case R.id.new_version_button:
                 intent = new Intent(this, NewVersionActivity.class);
                 break;
