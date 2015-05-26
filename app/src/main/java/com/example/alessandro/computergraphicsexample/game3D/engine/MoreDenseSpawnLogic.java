@@ -16,6 +16,7 @@ public class MoreDenseSpawnLogic implements SpawnLogic  {
 
     private static final float MAX_MOB_SPEED = 0.6f;
     private static final float STANDARD_DEVIATION = 5.5f;
+    private static final int N = 4;
     private float initialZ;
     private Random r = new Random();
     private float mobSpeed;
@@ -25,25 +26,30 @@ public class MoreDenseSpawnLogic implements SpawnLogic  {
         this.initialZ = initialZ;
         this.ship = ship;
 
-        mobSpeed = 0.05f;
+        mobSpeed = 0.12f;
     }
 
     @Override
     public Mob[] spawnMob() {
         Coordinate coord = ship.getCoordinate();
-        float x = STANDARD_DEVIATION * (float)r.nextGaussian() + coord.getX();
-        float y = STANDARD_DEVIATION * (float)r.nextGaussian() + coord.getY();
 
-        Mob[] mob = new Mob[1];
-        Coordinate newMobCoord = new Coordinate( x, y, initialZ);
-        mob[0] = new Mob3D(newMobCoord, mobSpeed);
-        mob[0].setCollisionRay(0.5);
+
+        Mob[] mobs = new Mob[ N ];
+        for (int i = 0; i < mobs.length ; i++) {
+
+            float x = STANDARD_DEVIATION * (float)r.nextGaussian() + coord.getX();
+            float y = STANDARD_DEVIATION * (float)r.nextGaussian() + coord.getY();
+            Coordinate newMobCoord = new Coordinate( x, y, initialZ);
+            mobs[i] = new Mob3D(newMobCoord, mobSpeed);
+            mobs[i].setCollisionRay(0.5);
+
+        }
 
         if(mobSpeed < MAX_MOB_SPEED) {
             mobSpeed += 0.0001f;
         }
 
-        return mob;
+        return mobs;
     }
 
 }

@@ -56,12 +56,12 @@ public class GameActivity extends Activity implements Observer {
         Coordinate cameraCoordinate = new Coordinate(
                 shipCoordinate.getX(),
                 shipCoordinate.getY()+1,
-                shipCoordinate.getZ()
+                shipCoordinate.getZ() -3
                 );
 
         //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), shipCoordinate );
         //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), new Coordinate(0,0,0) );
-        GameCamera camera = new GameCamera(new Coordinate(0.0f, 1.0f, 1.0f), cameraCoordinate );
+        GameCamera camera = new GameCamera(new Coordinate(0.0f, 4.0f, 1.0f), cameraCoordinate );
 
 
         final MobsManager mobsManager = new MobsManager();
@@ -69,7 +69,7 @@ public class GameActivity extends Activity implements Observer {
         //SpawnLogic spawnLogic = new SimpleSpawnLogic(20.0f, 10.0f, -50f);
         SpawnLogic spawnLogic = new MoreDenseSpawnLogic(ship, -60f);
         spawner = new Spawner(mobsManager, spawnLogic);
-        spawner.setSleepTime(200);
+        spawner.setSleepTime(500);
         spawnerThread = new Thread(spawner);
 
         //GAME ENGINE
@@ -85,8 +85,8 @@ public class GameActivity extends Activity implements Observer {
         renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
         surface.setRenderer(renderer);
 
-        Rect bound = new Rect(-4, 0, 4, 4);
-        surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 0.08f));
+        Rect bound = new Rect(-10, -10, 10, 10);
+        surface.setOnTouchListener(new FreeTouchController(this, ship, camera, bound, 0.15f));
 
         spawnerThread.start();
         gameEngineThread.start();

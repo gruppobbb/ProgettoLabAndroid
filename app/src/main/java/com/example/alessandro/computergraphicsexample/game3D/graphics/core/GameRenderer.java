@@ -35,6 +35,7 @@ public class GameRenderer implements GLSurfaceView.Renderer{
     private Ship3D ship;
     private ShaderProgram program;
     private GameCamera camera;
+    private GameCamera clonedCamera;
     private Light sunLight;
 
     private float[] mProjectionMatrix = new float[16];
@@ -53,6 +54,7 @@ public class GameRenderer implements GLSurfaceView.Renderer{
         this.context = context;
         this.mobsManager = mobsManager;
         this.camera = camera;
+        clonedCamera = null;
         this.sunLight = sunLight;
         this.ship = ship;
     }
@@ -114,9 +116,10 @@ public class GameRenderer implements GLSurfaceView.Renderer{
         //Clean della scena per un nuovo render.
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
+        drawShip();
+
         drawMobs();
 
-        drawShip();
     }
 
     /**
