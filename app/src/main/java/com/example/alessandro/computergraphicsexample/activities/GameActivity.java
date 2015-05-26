@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 
+import com.example.alessandro.computergraphicsexample.R;
+import com.example.alessandro.computergraphicsexample.game3D.audio.AudioManager;
+import com.example.alessandro.computergraphicsexample.game3D.audio.AudioPlayer;
 import com.example.alessandro.computergraphicsexample.game3D.control.FreeTouchController;
 import com.example.alessandro.computergraphicsexample.game3D.engine.SimpleSpawnLogic;
 import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
@@ -32,9 +35,18 @@ public class GameActivity extends Activity implements Observer {
     private Thread spawnerThread;
     private Thread gameEngineThread;
 
+    private AudioPlayer explosionPlayer;
+    private AudioPlayer backgroundPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AudioManager.getInstance().addResource("Explosion_sound", R.raw.ship_explosion);
+        AudioManager.getInstance().addResource("Background_sound", R.raw.singleplayer);
+
+        explosionPlayer = new AudioPlayer(this, "Explosion_sound", false);
+        backgroundPlayer = new AudioPlayer(this, "Background_sound", true);
 
         Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, -1.0f);
         final Ship3D ship = new Ship3D(shipCoordinate);
@@ -86,6 +98,7 @@ public class GameActivity extends Activity implements Observer {
 
         gameEngine.onResume();
         spawner.onResume();
+        backgroundPlayer.play();
 
     }
 
@@ -95,6 +108,8 @@ public class GameActivity extends Activity implements Observer {
 
         spawner.onPause();
         gameEngine.onPause();
+        backgroundPlayer.pause();
+
     }
 
     @Override
@@ -103,10 +118,14 @@ public class GameActivity extends Activity implements Observer {
 
         spawner.setToKill(true);
         gameEngine.setToKill(true);
+        backgroundPlayer.stop();
     }
 
     @Override
     public void update(Observable observable, Object data) {
+
+        explosionPlayer.play();
+        backgroundPlayer.stop();
 
         finish();
 
