@@ -30,6 +30,7 @@ public class AlternativeSimpleSpawnLogic implements SpawnLogic  {
         Mob[] mob = new Mob[1];
         Coordinate newMobCoord = new Coordinate(r.nextFloat() * heightBound * 2 - heightBound, r.nextFloat() * widthBound * 2 - widthBound, initialZ);
         mob[0] = new AlternativeMob3D(newMobCoord, 0.5f);
+        mob[0].setCollisionRay(5.0);
 
         return mob;
     }

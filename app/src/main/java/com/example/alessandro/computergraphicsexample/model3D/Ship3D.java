@@ -15,15 +15,12 @@ public class Ship3D extends Ship {
     private boolean needUpdate;
 
     private float[] angle = new float[3];
-    private Coordinate coord;
 
     public Ship3D(float x, float y, float z) {
 
         super( new Coordinate(x, y, z) );
         needUpdate = true;
-
     }
-
 
     public void updateModelMatrix(){
 
@@ -38,7 +35,7 @@ public class Ship3D extends Ship {
     }
 
     public void shiftShip(float x, float y){
-        coord = getCoordinate();
+        Coordinate coord = getCoordinate();
         coord.setX(coord.getX() + x);
         coord.setY(coord.getY() + y);
     }

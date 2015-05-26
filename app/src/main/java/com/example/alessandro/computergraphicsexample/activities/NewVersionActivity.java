@@ -40,6 +40,7 @@ public class NewVersionActivity extends Activity {
 
         Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, -5.0f);
         final AlternativeShip3D ship = new AlternativeShip3D(shipCoordinate);
+        ship.setCollisionRay(5.0);
         //ship.setAngle(0.0f, 180.0f, 0.0f);
 
         Coordinate cameraCoordinate = new Coordinate(
@@ -57,11 +58,12 @@ public class NewVersionActivity extends Activity {
 
         SpawnLogic spawnLogic = new AlternativeSimpleSpawnLogic(45.0f, 45.0f, -95.0f);
         spawner = new Spawner(mobsManager, spawnLogic);
-        spawner.setSleepTime(50);
+        spawner.setSleepTime(200);
         spawnerThread = new Thread(spawner);
 
         //GAME ENGINE
         gameEngine = new GameEngine(mobsManager, ship, new Coordinate(100, 100, -2));
+        //gameEngine.setDebugMode(true);
         gameEngineThread = new Thread(gameEngine);
 
 

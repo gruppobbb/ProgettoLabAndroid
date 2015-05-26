@@ -26,7 +26,7 @@
             android:label="@string/app_name"
             android:parentActivityName=".activities.GameMenu" >
         </activity>
-        <activity 
+        <activity
             android:name=".activities.NewVersionActivity"
             android:label="@string/title_activity_new_version"
             android:parentActivityName=".activities.GameMenu"
