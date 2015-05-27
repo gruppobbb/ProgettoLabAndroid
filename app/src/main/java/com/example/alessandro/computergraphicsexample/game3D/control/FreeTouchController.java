@@ -62,7 +62,7 @@ public class FreeTouchController implements View.OnTouchListener {
         mDensity = displayMetrics.density;
 
         cDelay = 18;
-        shiftScale = 0.03f;
+        shiftScale = 0.015f;
 
     }
 
@@ -122,7 +122,8 @@ public class FreeTouchController implements View.OnTouchListener {
         }
 
         ship3D.shiftTraslation(scaledDeltaX, scaledDetlaY, 0.0f);
-        camera.shiftTraslation(scaledDeltaX, scaledDetlaY, 0.0f);
+        camera.shiftY(scaledDetlaY);
+        //camera.shiftCameraY(scaledDetlaY);
     }
 
     private float chackDelta(float delta){

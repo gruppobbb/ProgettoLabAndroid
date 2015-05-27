@@ -49,19 +49,19 @@ public class GameActivity extends Activity implements Observer {
         explosionPlayer = new AudioPlayer(this, "Explosion_sound", false);
         backgroundPlayer = new AudioPlayer(this, "Background_sound", true);
 
-        Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, -1.0f);
+        Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, 0.0f);
         final Ship3D ship = new Ship3D(shipCoordinate);
         ship.setCollisionRay(0.75f);
 
         Coordinate cameraCoordinate = new Coordinate(
                 shipCoordinate.getX(),
                 shipCoordinate.getY()+1,
-                shipCoordinate.getZ() -3
+                shipCoordinate.getZ()
                 );
 
         //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), shipCoordinate );
         //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), new Coordinate(0,0,0) );
-        GameCamera camera = new GameCamera(new Coordinate(0.0f, 4.0f, 1.0f), cameraCoordinate );
+        GameCamera camera = new GameCamera(new Coordinate(0.0f, 1.0f, 2.0f), cameraCoordinate );
 
 
         final MobsManager mobsManager = new MobsManager();
@@ -85,8 +85,8 @@ public class GameActivity extends Activity implements Observer {
         renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
         surface.setRenderer(renderer);
 
-        Rect bound = new Rect(-10, -10, 10, 10);
-        surface.setOnTouchListener(new FreeTouchController(this, ship, camera, bound, 0.15f));
+        Rect bound = new Rect(-3, -3, 3, 3);
+        surface.setOnTouchListener(new FreeTouchController(this, ship, camera, bound, 0.08f));
 
         spawnerThread.start();
         gameEngineThread.start();

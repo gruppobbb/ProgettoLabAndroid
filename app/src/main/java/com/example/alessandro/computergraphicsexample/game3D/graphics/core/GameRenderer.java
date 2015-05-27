@@ -35,7 +35,6 @@ public class GameRenderer implements GLSurfaceView.Renderer{
     private Ship3D ship;
     private ShaderProgram program;
     private GameCamera camera;
-    private GameCamera clonedCamera;
     private Light sunLight;
 
     private float[] mProjectionMatrix = new float[16];
@@ -44,7 +43,7 @@ public class GameRenderer implements GLSurfaceView.Renderer{
      * Renderer ottimizzato per il disegno di una modalità singleplayer con N {@link Mob3D}
      * recuperati dal {@link MobsManager}, con una inquadratura definita dalla {@link GameCamera},
      * con una {@link Ship3D} controllata dal giocatore.
-     * @param context
+     * @param context context dell'activity in cui viene istanziato il Renderer
      * @param mobsManager componente contente tutte le istanze dei mob da disegnare
      * @param camera componente che deifinisce la posizione i dati della telecamera
      * @param sunLight componente che definisce la posizione della luce principale
@@ -54,7 +53,6 @@ public class GameRenderer implements GLSurfaceView.Renderer{
         this.context = context;
         this.mobsManager = mobsManager;
         this.camera = camera;
-        clonedCamera = null;
         this.sunLight = sunLight;
         this.ship = ship;
     }
@@ -108,7 +106,6 @@ public class GameRenderer implements GLSurfaceView.Renderer{
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 1, 100);
 
     }
-
 
     @Override
     public void onDrawFrame(GL10 gl10) {
