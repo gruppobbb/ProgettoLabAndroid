@@ -7,7 +7,7 @@ import model.mobs.Mob;
 import model.movement.Moveable;
 
 /**
- * Modello di un Mob contenente le informazioni per la rappresentazione di un Nodo e del suo modello
+ * Modello di un {@link Mob} contenente le informazioni per la rappresentazione di un Nodo e del suo modello
  * in una determinata posizione e con una determinata trasformazione.
  * @author Max
  * @author Jan
@@ -20,10 +20,8 @@ public class Mob3D extends Mob implements Moveable{
     private boolean needNewMatrix;
 
     /**
-     * Costruzione di una "istanza" del mob nelle coordinate {@link Coordinate}, con uno spostamento
-     * pari a shiftAmount.
-     * @param coordinate
-     * @param shiftAmount
+     * @param coordinate Coordinate iniziali del mob
+     * @param shiftAmount coefficiente di spostamento
      */
     public Mob3D(Coordinate coordinate, float shiftAmount) {
         super(coordinate, shiftAmount);

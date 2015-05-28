@@ -6,7 +6,7 @@ import model.Coordinate;
 import model.ships.Ship;
 
 /**
- * Modello di un Mob contenente le informazioni per la rappresentazione di un Nodo e del suo modello
+ * Modello di una {@link Ship} contenente le informazioni per la rappresentazione di un Nodo e del suo modello
  * in una determinata posizione e con una determinata trasformazione.
  * @author Max
  * @author Jan

@@ -8,7 +8,7 @@ import android.media.MediaPlayer;
  * Player per risorse audio. Fa riferimento al componente AudioManager per reperire le risorse richieste.
  * @see AudioManager
  */
-public class AudioPlayer {
+public class AudioPlayer{
 
     private MediaPlayer player;
 
