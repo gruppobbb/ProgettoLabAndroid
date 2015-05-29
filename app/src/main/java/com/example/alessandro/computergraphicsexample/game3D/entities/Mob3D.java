@@ -7,7 +7,7 @@ import model.mobs.Mob;
 import model.movement.Moveable;
 
 /**
- * Modello di un {@link Mob} contenente le informazioni per la rappresentazione di un Nodo e del suo modello
+ * Modello di un {@link Mob} contenente le informazioni per la rappresentazione di un Nodo
  * in una determinata posizione e con una determinata trasformazione.
  * @author Max
  * @author Jan
@@ -15,8 +15,6 @@ import model.movement.Moveable;
 public class Mob3D extends Mob implements Moveable{
 
     private float[] mModelMatrix = new float[16];
-    private float scale;
-    private float angle[] = new float[3];
     private boolean needNewMatrix;
 
     /**
@@ -26,32 +24,26 @@ public class Mob3D extends Mob implements Moveable{
     public Mob3D(Coordinate coordinate, float shiftAmount) {
         super(coordinate, shiftAmount);
 
-        //default
-        scale = 1.0f;
-        angle[0] = 0.0f;    //TODO: Su blender la scimmia è fatta al contrario, bisogna ruotare il modello.
-        angle[1] = (float)Math.PI;
-        angle[2] = 0.0f;
-
         needNewMatrix = true;
     }
 
+    /**
+     * Restituisce la model matrix della ship
+     * @return model matrix
+     */
     public float[] getModelMatrix() {
-
         if(needNewMatrix){
-
             Coordinate coord = getCoordinate();
-
             Matrix.setIdentityM(mModelMatrix, 0);
             Matrix.translateM(mModelMatrix, 0, coord.getX(), coord.getY(), coord.getZ());
-
             needNewMatrix = false;
-
         }
-
         return mModelMatrix;
-
     }
 
+    /**
+     * @see Moveable
+     */
     @Override
     public void move() {
         Coordinate coord = getCoordinate();
