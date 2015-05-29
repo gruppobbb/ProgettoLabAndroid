@@ -23,6 +23,7 @@ import java.util.Observer;
 import model.Coordinate;
 import model.GameEngine;
 import model.MobsManager;
+import model.ships.Ship;
 import model.spawning.SpawnLogic;
 import model.spawning.Spawner;
 
@@ -30,43 +31,59 @@ public class GameActivity extends Activity implements Observer {
 
     private GameSurface surface;
     private GameRenderer renderer;
-
     private Spawner spawner;
     private GameEngine gameEngine;
     private Thread spawnerThread;
     private Thread gameEngineThread;
-
     private AudioPlayer explosionPlayer;
     private AudioPlayer backgroundPlayer;
+    private Ship3D ship;
+    private MobsManager mobsManager;
+    private Coordinate shipCoordinate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AudioManager.getInstance().addResource("Explosion_sound", R.raw.ship_explosion);
-        AudioManager.getInstance().addResource("Background_sound", R.raw.singleplayer);
+        initGameElements();
 
-        explosionPlayer = new AudioPlayer(this, "Explosion_sound", false);
-        backgroundPlayer = new AudioPlayer(this, "Background_sound", true);
+        initGraphicsInterface();
 
-        Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, 0.0f);
-        final Ship3D ship = new Ship3D(shipCoordinate);
-        ship.setCollisionRay(0.75f);
+        initAudio();
 
+        setContentView(surface);
+
+        spawnerThread.start();
+        gameEngineThread.start();
+    }
+
+    private void initGraphicsInterface() {
         Coordinate cameraCoordinate = new Coordinate(
                 shipCoordinate.getX(),
                 shipCoordinate.getY()+1,
                 shipCoordinate.getZ()
-                );
+        );
 
-        //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), shipCoordinate );
-        //GameCamera camera = new GameCamera(new Coordinate(0.0f, 5.0f, 5.0f), new Coordinate(0,0,0) );
-        GameCamera camera = new GameCamera(new Coordinate(0.0f, 1.0f, 2.0f), cameraCoordinate );
+        GameCamera camera = new GameCamera(new Coordinate(0.0f, 1.0f, 2.0f), cameraCoordinate);
 
+        Light sunLight = new Light(new Coordinate(0.0f, 20.0f, 20.0f));
 
-        final MobsManager mobsManager = new MobsManager();
+        surface = new GameSurface(this);
+        renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
+        surface.setRenderer(renderer);
 
-        //SpawnLogic spawnLogic = new SimpleSpawnLogic(20.0f, 10.0f, -50f);
+        Rect bound = new Rect(-3, -3, 3, 3);
+        surface.setOnTouchListener(new FreeTouchController(this, ship, camera, bound, 0.08f));
+    }
+
+    private void initGameElements() {
+        shipCoordinate = new Coordinate(0.0f, 0.0f, 0.0f);
+        ship = new Ship3D(shipCoordinate, 0.75);
+
+        mobsManager = new MobsManager();
+
+        //SPAWNER
         SpawnLogic spawnLogic = new MoreDenseSpawnLogic(ship, 6.0f, 7, -60f);
         spawner = new Spawner(mobsManager, spawnLogic);
         spawner.setSleepTime(500);
@@ -77,21 +94,14 @@ public class GameActivity extends Activity implements Observer {
         //gameEngine.setDebugMode(true);
         gameEngine.addObserver(this);
         gameEngineThread = new Thread(gameEngine);
+    }
 
+    private void initAudio() {
+        AudioManager.getInstance().addResource("Explosion_sound", R.raw.ship_explosion);
+        AudioManager.getInstance().addResource("Background_sound", R.raw.singleplayer);
 
-        Light sunLight = new Light(new Coordinate(0.0f, 20.0f, 20.0f));
-
-        surface = new GameSurface(this);
-        renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
-        surface.setRenderer(renderer);
-
-        Rect bound = new Rect(-3, -3, 3, 3);
-        surface.setOnTouchListener(new FreeTouchController(this, ship, camera, bound, 0.08f));
-
-        spawnerThread.start();
-        gameEngineThread.start();
-
-        setContentView(surface);
+        explosionPlayer = new AudioPlayer(this, "Explosion_sound", false);
+        backgroundPlayer = new AudioPlayer(this, "Background_sound", true);
     }
 
     @Override
