@@ -12,23 +12,28 @@ import com.example.alessandro.computergraphicsexample.game3D.util.GameUtil;
 
 
 /**
+ * Surface di gioco, che utilizza le librerie OpenGL e {@link GameRenderer} per renderizzare grafica 3D.
  * @author Jancarlos.
  */
 public class GameSurface extends GLSurfaceView {
 
+    /**
+     * @param context
+     */
     public GameSurface(Context context) {
         super(context);
         init();
     }
 
+    /**
+     * @param context
+     * @param attrs
+     */
     public GameSurface(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    /**
-     * Inizializzazioni varie.
-     */
     private void init(){
         //Set OpenGL per l'uso della versione 2.0.
         setEGLContextClientVersion(2);

@@ -41,7 +41,6 @@ public class GameActivity extends Activity implements Observer {
     private MobsManager mobsManager;
     private Coordinate shipCoordinate;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

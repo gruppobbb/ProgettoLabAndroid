@@ -5,7 +5,7 @@ import android.opengl.Matrix;
 import model.Coordinate;
 
 /**
- * CLasse per la rappresentazione e gestione di una telecamera.
+ * Classe per la rappresentazione e gestione di una telecamera.
  * @author Jancarlos.
  */
 public class GameCamera {
@@ -31,6 +31,10 @@ public class GameCamera {
         needNewMatrix = true;
     }
 
+    /**
+     * Restituisce la view matrix associata alla telecamera.
+     * @return view matrix
+     */
     public float[] getViewMatrix() {
 
         if(needNewMatrix){
@@ -48,6 +52,10 @@ public class GameCamera {
         return mViewMatrix;
     }
 
+    /**
+     * Trasla la telecamera e il centro della quantità specificata.
+     * @param shiftAmount Traslazione
+     */
     public void shiftY(float shiftAmount){
         centrePosition.setY(centrePosition.getY() + shiftAmount);
         cameraPosition.setY(cameraPosition.getY() + shiftAmount);

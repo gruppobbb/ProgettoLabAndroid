@@ -18,7 +18,7 @@ public class GameMenu extends ActionBarActivity {
         setContentView(R.layout.activity_game_menu);
     }
 
-    public void openVersion( View view){
+    public void openVersion( View view) {
 
         Intent intent;
 
@@ -28,13 +28,11 @@ public class GameMenu extends ActionBarActivity {
                 intent = new Intent(this, GameActivity.class);
                 break;
 
-            default: return;
+            default:
+                return;
 
         }
 
         this.startActivity(intent);
-
     }
-
-
 }
