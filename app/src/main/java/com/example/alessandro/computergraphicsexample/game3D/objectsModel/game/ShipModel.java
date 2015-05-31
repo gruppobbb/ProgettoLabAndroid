@@ -6,6 +6,7 @@ import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 
 /**
+ * {@link Model} impostato per il caricamento e setting del modello 3d della Ship.
  * @author Jancarlos.
  */
 public class ShipModel extends Model {

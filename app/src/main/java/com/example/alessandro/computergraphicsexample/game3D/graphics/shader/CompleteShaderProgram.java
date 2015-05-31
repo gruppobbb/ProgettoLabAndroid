@@ -10,6 +10,8 @@ import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelD
 
 
 /**
+ *
+ * Shader con sia effetti di luce ambientale di che di luce speculare.
  * Created by Jancarlos.
  */
 public class CompleteShaderProgram extends ShaderProgram {

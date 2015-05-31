@@ -12,9 +12,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * Classe per il caricamento e decodifica delle texture.
  * Created by Jancarlos.
  */
 public class TextureLoader {
+
     private static final String TAG = "TextureManager";
 
     private Context context;
@@ -24,7 +26,7 @@ public class TextureLoader {
     }
 
     /**
-     * Metodo per il caricamento di una texture dalle Resources per OpenGL.
+     * Metodo per il caricamento di una texture dagli Assets per OpenGL.
      * @param texturePath path della texture, interno, tra gli Assets.
      * @return ID della texture caricata in OpenGL.
      */
@@ -55,6 +57,9 @@ public class TextureLoader {
 
     }
 
+    /*
+    Metodo per la creazione vera e propria della texture.
+     */
     private  int createTexture(Bitmap textureBitmap){
 
         final int[] textureObjectID = new int[1];
@@ -63,14 +68,14 @@ public class TextureLoader {
         GLES20.glGenTextures(1, textureObjectID, 0);
 
         if( textureObjectID[0] == 0){
-            if(JLogStatusManager.JTEXTURE_MANAGER_LOG_ON){
+            if(LogStatusManager.TEXTURE_MANAGER_LOG_ON){
                 Log.w(TAG, "Could not generate a new OpenGL texture object");
             }
             return 0;
         }
 
         if(textureBitmap == null){
-            if(JLogStatusManager.JTEXTURE_MANAGER_LOG_ON){
+            if(LogStatusManager.TEXTURE_MANAGER_LOG_ON){
                 Log.w(TAG, "Could not decode image into bitmap.");
             }
             GLES20.glDeleteTextures(1, textureObjectID, 0);

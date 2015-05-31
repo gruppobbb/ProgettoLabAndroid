@@ -12,30 +12,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Classe per il caricamento dei file con estensione ".obj".
+ * Classe per il caricamento dei file con estensione .obj.
  * Created by Jancarlos.
  */
 public class ObjLoader {
 
-    private static final String TAG = "JObjLoader";
-
     private Context context;
-
-    private static final int TYPE_OBJECT_NAME = 0;
-    private static final int TYPE_VERTEX = 1;
-    private static final int TYPE_TEXTURE_COORDINATE = 2;
-    private static final int TYPE_NORMAL = 3;
-    private static final int TYPE_FACE = 4;
-    //TODO: verificare se ne cessario il supporto per "vp"
-
 
     private String objectName;
     private float[] vertexData;
     private float[] textureData;
     private float[] normalData;
     private short[] indicesData;
-
-    int totalVertexCount;
 
     private ArrayList<Vector3f> vertices;
     private ArrayList<Vector2f> textures;
@@ -71,7 +59,6 @@ public class ObjLoader {
         BufferedReader reader;
         String line;
         String[] currentLine;
-        totalVertexCount = 0;
 
         try {
             inputStream = am.open(objPath);
@@ -88,7 +75,7 @@ public class ObjLoader {
                 }else if(line.startsWith("v ")){
 
                     vertices.add(new Vector3f(
-                            Float.parseFloat(currentLine[1]),      // X
+                            Float.parseFloat(currentLine[1]),     // X
                             Float.parseFloat(currentLine[2]),     // Y
                             Float.parseFloat(currentLine[3])      // Z
                     ));
@@ -96,14 +83,14 @@ public class ObjLoader {
                 } else if(line.startsWith("vt ")){
 
                     textures.add(new Vector2f(
-                            Float.parseFloat(currentLine[1]),      // S
+                            Float.parseFloat(currentLine[1]),     // S
                             Float.parseFloat(currentLine[2])      // T
                     ));
 
                 } else if(line.startsWith("vn ")){
 
                     normals.add(new Vector3f(
-                            Float.parseFloat(currentLine[1]),      // nX
+                            Float.parseFloat(currentLine[1]),     // nX
                             Float.parseFloat(currentLine[2]),     // nY
                             Float.parseFloat(currentLine[3])      // nZ
                     ));
@@ -119,10 +106,12 @@ public class ObjLoader {
             reader.close();
 
             if(textures.size() > 0 ){
+                //perche' ogni punto della texture richiede 2 componenti
                 textureData = new float[ vertices.size()*2 ];
             }
 
             if(normals.size() > 0){
+                //perche' consideriamo vertici con noormali a 3 componenti.
                 normalData = new float[ vertices.size()*3 ];
             }
 
@@ -133,7 +122,7 @@ public class ObjLoader {
         }
 
 
-        //perche' ogni vertice ha 3 componenti
+        //perche' consideriamo vertici con coordinate a 3 componenti.
         vertexData = new float[vertices.size()*3];
         indicesData = new short[indices.size()];
 
@@ -148,11 +137,13 @@ public class ObjLoader {
             indicesData[i] = indices.get(i);
         }
 
-
         return new ModelData( objectName, vertexData, textureData, normalData, indicesData);
     }
 
 
+    /*
+    Metodo per l'elaborazione delle linee "f ".
+     */
     private void handleFaceLines(){
 
         String[] currentFaceLineData;
@@ -163,7 +154,6 @@ public class ObjLoader {
         for (int i = 0; i < faceLines.size() ; i++) {
 
             currentFaceLineData = faceLines.get(i).split(" ");
-
 
             vertex1 = currentFaceLineData[1].split("/");
             vertex2 = currentFaceLineData[2].split("/");
@@ -222,9 +212,6 @@ public class ObjLoader {
             normalData[currentVertexPointer*3+2] = currentNorm.z;
         }
     }
-
-
-
 
     private class Vector2f{
         float x;

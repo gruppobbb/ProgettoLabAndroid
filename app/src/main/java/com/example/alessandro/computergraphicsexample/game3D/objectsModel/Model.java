@@ -1,8 +1,7 @@
 package com.example.alessandro.computergraphicsexample.game3D.objectsModel;
 
-import com.example.alessandro.computergraphicsexample.game3D.graphics.shader.ShaderProgram;
-
 /**
+ * Classe contente le informazioni per la rappresentazione di un modello 3D.
  * Created by Jancarlos.
  */
 public class Model {
@@ -16,8 +15,6 @@ public class Model {
 
     private ModelData data;
     private int texture;
-
-    private ShaderProgram program;
 
     public Model(String modelPath, String modelTexturePath){
         this.modelPath = modelPath;
@@ -38,14 +35,6 @@ public class Model {
 
     public ModelData getData() {
         return data;
-    }
-
-    public void setProgram(ShaderProgram program) {
-        this.program = program;
-    }
-
-    public ShaderProgram getProgram(){
-        return program;
     }
 
     public void setTexture(int texture) {

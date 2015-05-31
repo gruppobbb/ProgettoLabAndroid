@@ -25,7 +25,7 @@ public class Stand3D {
     }
 
     /**
-     * Restituisce la model matrix della ship
+     * Restituisce la model matrix dello Stand.
      * @return model matrix
      */
     public float[] getModelMatrix() {
@@ -44,7 +44,7 @@ public class Stand3D {
     }
 
     /**
-     * Modifica l'inclinazione della ship rispetto ai tre assi.
+     * Modifica l'inclinazione dello Stand rispetto ai tre assi.
      * @param shiftAngleX Incremento dell'inclinazione lungo l'asse X
      * @param shiftAngleY Incremento dell'inclinazione lungo l'asse Y
      * @param shiftAngleZ Incremento dell'inclinazione lungo l'asse Z

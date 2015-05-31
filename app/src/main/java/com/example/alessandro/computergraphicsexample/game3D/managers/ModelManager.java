@@ -5,6 +5,8 @@ import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 import java.util.HashMap;
 
 /**
+ * Gestore dei modelli caricati in moria, in grado di conservare i modelli precedentemente
+ * caricati in diverse activity.
  * @author Jancarlos.
  */
 public class ModelManager {

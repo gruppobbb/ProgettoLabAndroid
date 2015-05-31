@@ -16,7 +16,7 @@ import com.example.alessandro.computergraphicsexample.game3D.entities.GameCamera
 import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameRenderer;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameSurface;
-import com.example.alessandro.computergraphicsexample.game3D.graphics.hud.GameHud;
+import com.example.alessandro.computergraphicsexample.game3D.graphics.hud.ScoreHud;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -34,7 +34,7 @@ public class GameActivity extends Activity implements Observer {
 
     private GameSurface surface;
     private GameRenderer renderer;
-    private GameHud hud;
+    private ScoreHud hud;
     private Spawner spawner;
     private GameEngine gameEngine;
     private Thread spawnerThread;
@@ -66,7 +66,7 @@ public class GameActivity extends Activity implements Observer {
 
     }
 
-    public void startThreads(){
+    private void startThreads(){
         spawnerThread.start();
         gameEngineThread.start();
     }
@@ -84,7 +84,7 @@ public class GameActivity extends Activity implements Observer {
         renderer = new GameRenderer(this, mobsManager, camera, ship );
         surface.setRenderer(renderer);
 
-        hud = new GameHud(this, gameEngine.getScoreCalculator() );
+        hud = new ScoreHud(this, gameEngine.getScoreCalculator() );
 
 
         Rect bound = new Rect(-2, -1, 2, 2);

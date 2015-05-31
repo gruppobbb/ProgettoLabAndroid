@@ -9,7 +9,7 @@ import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 /**
- * Classe che contiene la descrizione diun oggetto per OpenGL.
+ * Classe che contiene la descrizione di un oggetto per OpenGL.
  * Created by Jancarlos.
  */
 public class ModelData {
@@ -17,7 +17,6 @@ public class ModelData {
     public static final int BYTES_PER_FLOAT = 4;
     public static final int BYTES_PER_SHORT = 2;
 
-    private String objectName;
     private FloatBuffer vertexBuffer;
     private FloatBuffer textureBuffer;
     private FloatBuffer normalBuffer;
@@ -46,8 +45,7 @@ public class ModelData {
     public ModelData(String objectName, float[] vertexData, float[] textureData, float[] normalData,
                      short[] indicesData) {
 
-        this.objectName = objectName;
-
+        Log.d("ModelData", "Data:\n -loading: "+objectName);
 
         //Inizializzazione del buffer contenente la posizione dei vertici.
         vertexBuffer = loadFloatBuffer(vertexData);
@@ -66,7 +64,6 @@ public class ModelData {
         indicesBuffer = loadShortBuffer(indicesData);
 
         indexCount = (short)indicesData.length;
-        //Log.e("ModelData", objectName + " indexCount " + indexCount);
     }
 
 
@@ -88,7 +85,7 @@ public class ModelData {
     }
 
     /**
-     * Metodo per il caricamento di un vettore short java in un ShortBuffer, odinato,
+     * Metodo per il caricamento di un vettore short java in un ShortBuffer, ordinato,
      * in codice nativo per OpenGL.
      *
      * @param inShortData vettore short da caricare
@@ -106,54 +103,52 @@ public class ModelData {
 
 
     /**
-     * Variante del metodo per l'associazione in cui si considerano nulli offset e stride, mentre
-     * si considera costante il numero di componenti per vertice, 3. Da usare per buffer separati standard.
+     * Metodo per il caricamento del buffer contenente le informazioni dei vertici dell'attuale
+     * oggetto 3D da disegnare.
      *
-     * @param attributeLocation puntatore all'attributo nello shader.
+     * @param vertexAttributeLocation reference dell'attributo per le coordinate dei vertici.
      */
-    public void directSetVertexAttributePointer(int attributeLocation) {
-
-        //TODO: fare diventare il meodo riutilizzbile mediante l'uso di switch e costanti.
+    public void directSetVertexAttributePointer(int vertexAttributeLocation) {
         //Set nel punto iniziale, comprensivo di offset, del buffer.
         vertexBuffer.position(0);
-        GLES20.glVertexAttribPointer(attributeLocation, 3, GLES20.GL_FLOAT,
+        GLES20.glVertexAttribPointer(vertexAttributeLocation, 3, GLES20.GL_FLOAT,
                 false, 0, vertexBuffer);
 
-        GLES20.glEnableVertexAttribArray(attributeLocation);
+        GLES20.glEnableVertexAttribArray(vertexAttributeLocation);
         //Reset della posizione del buffer per quando verra' richiamato da OpenGL.
         vertexBuffer.position(0);
-
-
     }
 
 
     /**
-     * Variante del metodo per l'associazione in cui si considerano nulli offset e stride, mentre
-     * si considera costante il numero di componenti per vertice, 3. Da usare per buffer separati standard.
+     * Metodo per il caricamento del buffer contenente le informazioni delle coordinate delle texture
+     * per attuale oggetto 3D da disegnare.
      *
-     * @param attributeLocation puntatore all'attributo nello shader.
+     * @param textureAttributeLocation reference dell'attributo per le corrdinate della texture.
      */
-    public void directSetTextureAttributePointer(int attributeLocation) {
-
-        //TODO: fare diventare il meodo riutilizzbile mediante l'uso di switch e costanti.
+    public void directSetTextureAttributePointer(int textureAttributeLocation) {
         //Set nel punto iniziale, comprensivo di offset, del buffer.
         textureBuffer.position(0);
-        GLES20.glVertexAttribPointer(attributeLocation, 2, GLES20.GL_FLOAT,
+        GLES20.glVertexAttribPointer(textureAttributeLocation, 2, GLES20.GL_FLOAT,
                 false, 0, textureBuffer);
 
-        GLES20.glEnableVertexAttribArray(attributeLocation);
+        GLES20.glEnableVertexAttribArray(textureAttributeLocation);
         //Reset della posizione del buffer per quando verra' richiamato da OpenGL.
         textureBuffer.position(0);
     }
 
 
-    public void directSetNormalAttributePointer(int normalLocation){
+    /**
+     * Metodo per il caricamento del buffer contenente le informazioni delle normali dell'attuale
+     * oggetto 3D da disegnare.
+     * @param normalAttributeLocation reference dell'attibuto per le normali.
+     */
+    public void directSetNormalAttributePointer(int normalAttributeLocation){
         normalBuffer.position(0);
-        GLES20.glVertexAttribPointer(normalLocation, 3, GLES20.GL_FLOAT,
+        GLES20.glVertexAttribPointer(normalAttributeLocation, 3, GLES20.GL_FLOAT,
                 false, 0, normalBuffer);
-        GLES20.glEnableVertexAttribArray(normalLocation);
+        GLES20.glEnableVertexAttribArray(normalAttributeLocation);
         normalBuffer.position(0);
-
     }
 
     public FloatBuffer getTextureBuffer() {

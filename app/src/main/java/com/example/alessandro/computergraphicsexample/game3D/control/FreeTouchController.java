@@ -15,6 +15,8 @@ import java.util.TimerTask;
 import model.Coordinate;
 
 /**
+ * Controller basato sul uso del touch per simulare un analogico. Si posiziona il dito in un punto,
+ * e questo diventa l'orgine i riferimento per il calcolo dell'ammontare dello spostamento.
  * @author Jancarlos.
  */
 public class FreeTouchController implements View.OnTouchListener {
@@ -37,7 +39,7 @@ public class FreeTouchController implements View.OnTouchListener {
      * @param activity activity in cui viene utilizzato il controllo
      * @param ship3D ship da controllare
      * @param bound limiti del controllo
-     * @param maxModulo velocita' massima
+     * @param maxModulo velocita' massima pr step
      */
     public FreeTouchController(Activity activity, Ship3D ship3D, Rect bound, float maxModulo) {
 
@@ -95,6 +97,9 @@ public class FreeTouchController implements View.OnTouchListener {
         return true;
     }
 
+    /*
+    Metodo che effettua la routine per lo spostamento.
+     */
     private void move(){
 
         Coordinate coord = ship3D.getCoordinate();
@@ -110,15 +115,12 @@ public class FreeTouchController implements View.OnTouchListener {
             scaledDetlaY = 0;
         }
 
-        moveShip(scaledDeltaX, scaledDetlaY);
-    }
-
-    private void moveShip(float scaledDeltaX, float scaledDetlaY){
-
         ship3D.shiftTraslation(scaledDeltaX, scaledDetlaY, 0.0f);
-
     }
 
+    /*
+    Metodo che calcola e verifica l'ammontare della traslazione.
+     */
     private float chackDelta(float startValue, float coordinateComponenteValue){
 
         float delta = ((startValue - coordinateComponenteValue ) / mDensity / 2f ) * SHIFT_SCALE;

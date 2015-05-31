@@ -24,6 +24,7 @@ import javax.microedition.khronos.opengles.GL10;
 import model.Coordinate;
 
 /**
+ * Renderer dedicato al solo render di una scena per il menu.
  * @author Jancarlos.
  */
 public class MenuRenderer implements GLSurfaceView.Renderer {
@@ -77,6 +78,9 @@ public class MenuRenderer implements GLSurfaceView.Renderer {
         preloadMobs();
     }
 
+    /*
+    Inizializzaizone modelli.
+     */
     public void init(){
 
         modelManager = ModelManager.getInstance();
@@ -100,6 +104,9 @@ public class MenuRenderer implements GLSurfaceView.Renderer {
         builder.buildModel(standModel);
     }
 
+    /*
+    Precaricamento di modelli aggiuntivi, utili per la modalità sucessiva.
+     */
     private void preloadMobs(){
         if(!modelManager.containsModel(MobsModel.MODEL_ID)){
             MobsModel mobsModel = new MobsModel(context);

@@ -11,8 +11,14 @@ import java.io.InputStreamReader;
 /**
  * Created by Jancarlos.
  */
-public class JTextFileManager {
+public class TextFileManager {
 
+    /**
+     * Lettura di un file di testo per il salvataggio del contenuto in un unica stringa di caratteri.
+     * @param context
+     * @param resourceID identificativo nelle resurces del file da leggere.
+     * @return stringa di caratteri contenente tutto il contenuto dei file.
+     */
     public static String readFileFromResources(Context context, int resourceID){
         StringBuilder body = new StringBuilder();
 

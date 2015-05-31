@@ -3,12 +3,13 @@ package com.example.alessandro.computergraphicsexample.game3D.graphics.shader;
 
 import android.content.Context;
 
-import com.example.alessandro.computergraphicsexample.game3D.managers.JShaderManager;
-import com.example.alessandro.computergraphicsexample.game3D.managers.JTextFileManager;
+import com.example.alessandro.computergraphicsexample.game3D.managers.ShaderManager;
+import com.example.alessandro.computergraphicsexample.game3D.managers.TextFileManager;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelData;
 
 /**
+ * Classe per la gestione degli shader.
  * Created by Jancarlos.
  */
 public abstract class ShaderProgram {
@@ -32,9 +33,9 @@ public abstract class ShaderProgram {
     public ShaderProgram(Context context, int vertexShaderResourceID,
                          int fragmentShaderResourceID){
 
-        program = JShaderManager.buildProgram(
-                JTextFileManager.readFileFromResources(context, vertexShaderResourceID),
-                JTextFileManager.readFileFromResources(context, fragmentShaderResourceID)
+        program = ShaderManager.buildProgram(
+                TextFileManager.readFileFromResources(context, vertexShaderResourceID),
+                TextFileManager.readFileFromResources(context, fragmentShaderResourceID)
         );
     }
 
@@ -42,14 +43,34 @@ public abstract class ShaderProgram {
         return program;
     }
 
+    /**
+     * Associazione dei dati tramite i reference agli uniform dello shader.
+     * @param data
+     */
     public abstract void bindData(ModelData data);
 
+    /**
+     * Caricamento in memoria della ProjectionMatrix.
+     * @param mProjectionMatrix
+     */
     public abstract void loadProjectionMatrix(float[] mProjectionMatrix);
 
+    /**
+     * Caricamento in memoria della ViewMatrix.
+     * @param mViewMatrix
+     */
     public abstract void loadViewMatrix(float[] mViewMatrix);
 
+    /**
+     * Caricamento in memoria degli uniform specifici del modello.
+     * @param model
+     */
     public abstract void loadPerModelUniform(Model model);
 
+    /**
+     * Caricamento in memoria della sola ModelMatrix per un modello precaricato in memoria.
+     * @param modelMatrix
+     */
     public abstract void loadModelMatrix(float[] modelMatrix);
 
 }

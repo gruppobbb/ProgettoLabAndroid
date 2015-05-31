@@ -6,7 +6,7 @@ import android.util.Log;
 /**
  * Created by Jancarlos.
  */
-public class JShaderManager {
+public class ShaderManager {
 
     private static final String TAG = "ShaderManager";
 
@@ -44,7 +44,7 @@ public class JShaderManager {
         final int shaderObjectID = GLES20.glCreateShader(type);
 
         if(shaderObjectID == 0){
-            if(JLogStatusManager.JSHADER_MANAGER_LOG_ON){
+            if(LogStatusManager.SHADER_MANAGER_LOG_ON){
                 Log.w(TAG, "\nCould not create new shader.\n Type: " + type + "\n" + shaderCode);
             }
 
@@ -64,7 +64,7 @@ public class JShaderManager {
         final int[] compileStatus = new int[1];
         GLES20.glGetShaderiv(shaderObjectID, GLES20.GL_COMPILE_STATUS, compileStatus, 0);
 
-        if(JLogStatusManager.JSHADER_MANAGER_LOG_ON){
+        if(LogStatusManager.SHADER_MANAGER_LOG_ON){
             Log.d(TAG, "\nResult of compiling source: \n" + shaderCode + "\n" +
                     GLES20.glGetShaderInfoLog(shaderObjectID));
         }
@@ -103,7 +103,7 @@ public class JShaderManager {
         final int programObjectID = GLES20.glCreateProgram();
 
         if(programObjectID == 0){
-            if(JLogStatusManager.JSHADER_MANAGER_LOG_ON){
+            if(LogStatusManager.SHADER_MANAGER_LOG_ON){
                 Log.w(TAG, "Could not create program.");
             }
 
@@ -125,7 +125,7 @@ public class JShaderManager {
 
         if(linkStatus[0] == 0){
             GLES20.glDeleteProgram(programObjectID);
-            if(JLogStatusManager.JSHADER_MANAGER_LOG_ON){
+            if(LogStatusManager.SHADER_MANAGER_LOG_ON){
                 Log.v(TAG, "Linking of program failed");
             }
             return 0;
@@ -166,7 +166,7 @@ public class JShaderManager {
 
         program = linkProgram(vertexShader, fragmentShader);
 
-        if(JLogStatusManager.JSHADER_MANAGER_LOG_ON){
+        if(LogStatusManager.SHADER_MANAGER_LOG_ON){
             validateProgram(program);
         }
         return program;

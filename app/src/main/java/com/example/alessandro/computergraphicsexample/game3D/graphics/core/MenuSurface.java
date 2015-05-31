@@ -5,6 +5,7 @@ import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 
 /**
+ * Surface dedicate alla sola visualizzazione della scena renderizzata per il menu.
  * @author Jancarlos.
  */
 public class MenuSurface extends GLSurfaceView {
