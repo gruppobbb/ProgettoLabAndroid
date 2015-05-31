@@ -27,8 +27,9 @@ public class FreeTouchController implements View.OnTouchListener {
     private float deltaX, deltaY;
 
     private Timer cTimer;
-    private long cDelay;
-    private float shiftScale;
+    private static final long DELAY = 30;
+    private static final float SHIFT_SCALE = 0.03F;
+    private static final float MAX_MODULO_CAP = 0.08f;
 
     /**
      * Crea un controllo touch per una ship con una velocita' massima di maxModulo ( deve essere minore di 0.08 ).
@@ -47,18 +48,13 @@ public class FreeTouchController implements View.OnTouchListener {
         minY = bound.top;
         maxY = bound.bottom;
 
-        if(maxModulo > 0){
-            this.maxModulo = maxModulo;
-        }else{
-            this.maxModulo = 0.08f;
+        if(maxModulo < 0 || maxModulo > MAX_MODULO_CAP){
+            this.maxModulo = MAX_MODULO_CAP;
         }
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         mDensity = displayMetrics.density;
-
-        cDelay = 18;
-        shiftScale = 0.03f;
 
     }
 
@@ -75,13 +71,13 @@ public class FreeTouchController implements View.OnTouchListener {
                     public void run() {
                             move();
                     }
-                }, cDelay, cDelay);
+                }, DELAY, DELAY);
                 break;
             }
 
             case MotionEvent.ACTION_MOVE: {
-                deltaX =  chackDelta(-((startX - motionEvent.getX()) / mDensity / 2f ) * shiftScale );
-                deltaY = chackDelta(((startY - motionEvent.getY()) / mDensity / 2f) * shiftScale);
+                deltaX =  -chackDelta(startX, motionEvent.getX());
+                deltaY = chackDelta(startX, motionEvent.getY());
                 break;
             }
 
@@ -120,7 +116,10 @@ public class FreeTouchController implements View.OnTouchListener {
 
     }
 
-    private float chackDelta(float delta){
+    private float chackDelta(float startValue, float coordinateComponenteValue){
+
+        float delta = ((startValue - coordinateComponenteValue ) / mDensity / 2f ) * SHIFT_SCALE;
+
         //Per alleggerire il carico cpu non chiamo Math.abs() e Math.sign();
         if( delta > maxModulo ){
             delta = maxModulo;
