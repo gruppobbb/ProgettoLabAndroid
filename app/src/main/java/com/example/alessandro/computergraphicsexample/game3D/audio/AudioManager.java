@@ -17,7 +17,7 @@ public class AudioManager {  //SINGLETON
 
     /**
      * Fornisce l'istanza di AudioManager.
-     * Essendo un singleton, questo metodo è l'unico modo per poter accedere all'istanza correntemente in uso.
+     * Essendo un singleton, questo metodo e' l'unico modo per poter accedere all'istanza correntemente in uso.
      * @return istanza di AudioManager
      */
     public static AudioManager getInstance() {
@@ -29,7 +29,7 @@ public class AudioManager {  //SINGLETON
 
     /**
      * Aggiunge una risorsa audio, associandole un identificatore.
-     * Non è possibile associare lo stesso identificatore a risorse diverse, pertanto una risorsa mappata con un nome già presente non verrà inserita.
+     * Non ï¿½ possibile associare lo stesso identificatore a risorse diverse, pertanto una risorsa mappata con un nome giï¿½ presente non verrï¿½ inserita.
      * @param name nome da associare
      * @param res riferimento alla risorsa da mappare
      */

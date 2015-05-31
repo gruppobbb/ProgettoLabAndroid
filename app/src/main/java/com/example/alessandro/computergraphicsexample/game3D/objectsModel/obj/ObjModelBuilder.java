@@ -21,8 +21,11 @@ public class ObjModelBuilder implements ModelBuilder {
 
     @Override
     public void buildModel(Model model) {
-        ModelData data = loader.loadOBJFromAssets(model.getModelPath());
-        model.setData(data);
+
+        if(model.getData() == null ){
+            ModelData data = loader.loadOBJFromAssets(model.getModelPath());
+            model.setData(data);
+        }
 
         int textureID = textureLoader.loadTextureFromAssets(model.getModelTexturePath());
         model.setTexture(textureID);

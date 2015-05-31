@@ -3,8 +3,6 @@ package com.example.alessandro.computergraphicsexample.game3D.graphics.shader;
 
 import android.content.Context;
 
-import com.example.alessandro.computergraphicsexample.game3D.entities.GameCamera;
-import com.example.alessandro.computergraphicsexample.game3D.entities.Light;
 import com.example.alessandro.computergraphicsexample.game3D.managers.JShaderManager;
 import com.example.alessandro.computergraphicsexample.game3D.managers.JTextFileManager;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
@@ -21,8 +19,6 @@ public abstract class ShaderProgram {
     public static final String U_I_V_MATRIX = "u_InverseVMatrix";
     public static final String U_M_MATRIX = "u_MMatrix";
     public static final String U_TEXTURE_UNIT = "u_TextureUnit";
-    public static final String U_LIGHT_POSITION = "u_LightPos";
-    public static final String U_LIGHT_COLOR = "u_LightColor";
     public static final String U_SHINEDAMPER = "u_ShineDamper";
     public static final String U_REFLECTIVITY = "u_Reflectivity";
 
@@ -48,7 +44,9 @@ public abstract class ShaderProgram {
 
     public abstract void bindData(ModelData data);
 
-    public abstract void loadGlobalUniforms(float[] mProjectionMatrix, GameCamera camera, Light Sunlight);
+    public abstract void loadProjectionMatrix(float[] mProjectionMatrix);
+
+    public abstract void loadViewMatrix(float[] mViewMatrix);
 
     public abstract void loadPerModelUniform(Model model);
 

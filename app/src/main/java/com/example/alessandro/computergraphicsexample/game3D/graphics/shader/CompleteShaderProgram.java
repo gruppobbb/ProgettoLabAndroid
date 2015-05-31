@@ -5,9 +5,6 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import com.example.alessandro.computergraphicsexample.R;
-
-import com.example.alessandro.computergraphicsexample.game3D.entities.GameCamera;
-import com.example.alessandro.computergraphicsexample.game3D.entities.Light;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.obj.ModelData;
 
@@ -24,8 +21,6 @@ public class CompleteShaderProgram extends ShaderProgram {
     private int u_ModelMatrixLocation;
 
     private int u_TextureUnitLocation;
-    private int u_LightColorPosition;
-    private int u_LightPosLocation;
     private int u_ShineDumperLocation;
     private int u_ReflectivityLocation;
 
@@ -47,8 +42,6 @@ public class CompleteShaderProgram extends ShaderProgram {
         u_ModelMatrixLocation = GLES20.glGetUniformLocation(getProgramID(), U_M_MATRIX);
 
         u_TextureUnitLocation = GLES20.glGetUniformLocation(getProgramID(), U_TEXTURE_UNIT);
-        u_LightPosLocation = GLES20.glGetUniformLocation(getProgramID(), U_LIGHT_POSITION);
-        u_LightColorPosition = GLES20.glGetUniformLocation(getProgramID(), U_LIGHT_COLOR);
 
         u_ShineDumperLocation = GLES20.glGetUniformLocation(getProgramID(), U_SHINEDAMPER);
         u_ReflectivityLocation = GLES20.glGetUniformLocation(getProgramID(), U_REFLECTIVITY);
@@ -74,34 +67,28 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     }
 
-    @Override
-    public void loadGlobalUniforms(float[] mProjectionMatrix, GameCamera camera, Light light){
+    float[] mInverseViewMatrix = new float[16];
 
+    @Override
+    public void loadProjectionMatrix(float[] mProjectionMatrix) {
         //Passaggio della matrice di Proiezione
         GLES20.glUniformMatrix4fv(u_ProjectionMatrixLocation, 1, false, mProjectionMatrix, 0);
+    }
 
+    @Override
+    public void loadViewMatrix(float[] mViewMatrix) {
         //Passaggio della view matrix
-        GLES20.glUniformMatrix4fv(u_ViewMatrixLocation, 1, false, camera.getViewMatrix(), 0);
+        GLES20.glUniformMatrix4fv(u_ViewMatrixLocation, 1, false, mViewMatrix, 0);
 
-        //Passaggio della view matrix invertita*
-        float[] mInverseViewMatrix = new float[16];
-        Matrix.invertM(mInverseViewMatrix, 0, camera.getViewMatrix(), 0);
+        //Passaggio della view matrix invertita
+        Matrix.invertM(mInverseViewMatrix, 0, mViewMatrix, 0);
         GLES20.glUniformMatrix4fv(u_InverseViewMatrixLocation, 1, false, mInverseViewMatrix, 0);
 
-        //Passaggio della posizione della luce principale.
-        GLES20.glUniform3fv(u_LightPosLocation, 0, light.getPositionVector(), 0);
-
-        //Passaggio del colore della luce principale.
-        GLES20.glUniform4fv(u_LightColorPosition, 0, light.getColor(), 0);
-
         /*
-
-        * E' possibile calcolarla dirattamente nel vertex shader, ma oltre al fatto
-             che è computazionalmente pesante da calcolare, la funzione gls che la colcola
-             e' stata introdotta da OpenGL3.
-
+           E' possibile calcolarla dirattamente nel vertex shader, ma oltre al fatto
+           che è computazionalmente pesante da calcolare, la funzione gls che la colcola
+           e' stata introdotta con OpenGL3.
          */
-
     }
 
     @Override

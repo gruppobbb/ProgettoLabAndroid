@@ -1,17 +1,23 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal|bottom"
             android:padding="@dimen/activity_horizontal_margin"
-            android:orientation="vertical"
-            tools:context="com.example.alessandro.computergraphicsexample.activities.GameMenu">
+            tools:context="com.example.alessandro.computergraphicsexample.activities.GameMenu"
+    android:background="@drawable/blue_space">
 
     <Button
-        android:id="@+id/new_version_button"
-        android:layout_width="fill_parent"
+        android:id="@+id/new_game_button"
+        android:background="@drawable/button_shape"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="New Version"
-        android:onClick="openVersion"/>
+        android:text="@string/new_game_button"
+        android:onClick="handleButtonPress"
+        android:enabled="true"
+        android:textSize="32sp"
+        android:layout_margin="10dp"
+        />
 
-</LinearLayout>
+</RelativeLayout>

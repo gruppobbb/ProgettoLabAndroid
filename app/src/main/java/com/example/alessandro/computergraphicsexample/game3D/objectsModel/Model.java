@@ -20,7 +20,7 @@ public class Model {
 
     private ShaderProgram program;
 
-    public Model( String modelPath, String modelTexturePath){
+    public Model(String modelPath, String modelTexturePath){
         this.modelPath = modelPath;
         this.modelTexturePath = modelTexturePath;
     }

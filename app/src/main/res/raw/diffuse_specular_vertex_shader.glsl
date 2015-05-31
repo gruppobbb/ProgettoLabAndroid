@@ -19,7 +19,7 @@ void main() {
 
 	vec3 tmp = u_LightPos;
 	tmp.x = 0.0;
-	tmp.y = 10.0;
+	tmp.y = -2.0;
 	tmp.z = 10.0;
 
     vec4 wordlPosition = u_MMatrix * a_Position;

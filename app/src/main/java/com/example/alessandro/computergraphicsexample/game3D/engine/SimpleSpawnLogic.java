@@ -11,7 +11,7 @@ import model.spawning.SpawnLogic;
 /**
  * @author Max
  * Una semplice logica di spawning, che utilizza variabili casuali uniformi per selezionare le coordinate di spawn.
- * Non permette lo spawn simultaneo di più mob.
+ * Non permette lo spawn simultaneo di piu' mob.
  */
 public class SimpleSpawnLogic implements SpawnLogic  {
 

@@ -6,7 +6,6 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.alessandro.computergraphicsexample.game3D.entities.GameCamera;
 import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
 
 import java.util.Timer;
@@ -19,11 +18,7 @@ import model.Coordinate;
  */
 public class FreeTouchController implements View.OnTouchListener {
 
-    private static final String TAG = "FreeTouchController";
-
     private Ship3D ship3D;
-    private GameCamera camera;
-
     private float mDensity;
     private float maxModulo;
     private float maxX, maxY;
@@ -42,9 +37,10 @@ public class FreeTouchController implements View.OnTouchListener {
      * @param bound limiti del controllo
      * @param maxModulo velocita' massima
      */
-    public FreeTouchController(Activity activity, Ship3D ship3D, GameCamera camera, Rect bound, float maxModulo) {
+    public FreeTouchController(Activity activity, Ship3D ship3D, Rect bound, float maxModulo) {
+
         this.ship3D = ship3D;
-        this.camera = camera;
+
         minX = bound.left;
         maxX = bound.right;
 
@@ -62,46 +58,37 @@ public class FreeTouchController implements View.OnTouchListener {
         mDensity = displayMetrics.density;
 
         cDelay = 18;
-        shiftScale = 0.015f;
+        shiftScale = 0.03f;
 
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
-
         switch (motionEvent.getAction()){
             case MotionEvent.ACTION_DOWN: {
                 startX = motionEvent.getX();
                 startY = motionEvent.getY();
-
                 cTimer = new Timer();
-
                 cTimer.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
-                            moveShip();
+                            move();
                     }
                 }, cDelay, cDelay);
-
-
                 break;
             }
 
             case MotionEvent.ACTION_MOVE: {
-
-                deltaX =  chackDelta((-(startX - motionEvent.getX()) / mDensity / 2f ) * shiftScale );
-
+                deltaX =  chackDelta(-((startX - motionEvent.getX()) / mDensity / 2f ) * shiftScale );
                 deltaY = chackDelta(((startY - motionEvent.getY()) / mDensity / 2f) * shiftScale);
-
                 break;
-
             }
 
             case MotionEvent.ACTION_UP: {
                 deltaX = 0.0f;
                 deltaY = 0.0f;
-
+                cTimer.purge();
                 cTimer.cancel();
                 break;
             }
@@ -109,11 +96,14 @@ public class FreeTouchController implements View.OnTouchListener {
         return true;
     }
 
-    private void moveShip(){
+    private void move(){
+
         Coordinate coord = ship3D.getCoordinate();
+
         float scaledDeltaX = deltaX;
         float scaledDetlaY = deltaY;
-        if(coord.getX() + scaledDeltaX < minX || coord.getX() + scaledDeltaX > maxX ){
+
+        if( coord.getX() + scaledDeltaX < minX || coord.getX() + scaledDeltaX > maxX ){
             scaledDeltaX = 0;
         }
 
@@ -121,17 +111,22 @@ public class FreeTouchController implements View.OnTouchListener {
             scaledDetlaY = 0;
         }
 
+        moveShip(scaledDeltaX, scaledDetlaY);
+    }
+
+    private void moveShip(float scaledDeltaX, float scaledDetlaY){
+
         ship3D.shiftTraslation(scaledDeltaX, scaledDetlaY, 0.0f);
-        camera.shiftY(scaledDetlaY);
-        //camera.shiftCameraY(scaledDetlaY);
+
     }
 
     private float chackDelta(float delta){
-        if( Math.abs( delta ) > maxModulo){
-            float sign = Math.signum(delta);
-            delta = sign * maxModulo;
+        //Per alleggerire il carico cpu non chiamo Math.abs() e Math.sign();
+        if( delta > maxModulo ){
+            delta = maxModulo;
+        }else if( delta < -maxModulo){
+            delta = -maxModulo;
         }
-
         return delta;
     }
 }

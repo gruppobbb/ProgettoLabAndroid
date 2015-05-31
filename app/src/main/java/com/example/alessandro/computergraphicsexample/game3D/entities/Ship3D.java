@@ -14,7 +14,6 @@ import model.ships.Ship;
 public class Ship3D extends Ship{
 
     private float[] mModelMatrix = new float[16];
-    private float scale;
     private float angle[] = new float[3];
     private boolean needNewMatrix;
 
@@ -26,7 +25,6 @@ public class Ship3D extends Ship{
     public Ship3D(Coordinate coordinate) {
         super(coordinate);
         //default
-        scale = 1.0f;
         angle[0] = 0.0f;    //TODO: Su blender la scimmia è fatta al contrario, bisogna ruotare il modello.
         angle[1] = (float)Math.PI;
         angle[2] = 0.0f;
@@ -60,11 +58,26 @@ public class Ship3D extends Ship{
             Matrix.rotateM(mModelMatrix, 0, angle[1], 0.0f, 1.0f, 0.0f);
             Matrix.rotateM(mModelMatrix, 0, angle[2], 0.0f, 0.0f, 1.0f);
 
-            Matrix.scaleM(mModelMatrix, 0, scale, scale, scale);
-
             needNewMatrix = false;
         }
         return mModelMatrix;
+    }
+
+
+    /**
+     * Riposizionamento del centro del modello della ship in un nuovo punto.
+     * @param newX
+     * @param newY
+     * @param newZ
+     */
+    public void setTraslation(float newX, float newY, float newZ){
+
+        Coordinate coord = getCoordinate();
+        coord.setX( newX );
+        coord.setY( newY);
+        coord.setZ( newZ );
+        needNewMatrix = true;
+
     }
 
     /**
@@ -74,6 +87,7 @@ public class Ship3D extends Ship{
      * @param shiftZ traslazione lungo Z
      */
     public void shiftTraslation(float shiftX, float shiftY, float shiftZ){
+
         Coordinate coord = getCoordinate();
         coord.setX(coord.getX() + shiftX );
         coord.setY(coord.getY() + shiftY );

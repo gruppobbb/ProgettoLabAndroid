@@ -4,18 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.audio.AudioManager;
 import com.example.alessandro.computergraphicsexample.game3D.audio.AudioPlayer;
 import com.example.alessandro.computergraphicsexample.game3D.control.FreeTouchController;
 import com.example.alessandro.computergraphicsexample.game3D.engine.MoreDenseSpawnLogic;
-import com.example.alessandro.computergraphicsexample.game3D.engine.SimpleSpawnLogic;
-import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
 import com.example.alessandro.computergraphicsexample.game3D.entities.GameCamera;
-import com.example.alessandro.computergraphicsexample.game3D.entities.Light;
+import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameRenderer;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameSurface;
+import com.example.alessandro.computergraphicsexample.game3D.graphics.hud.GameHud;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -23,7 +24,6 @@ import java.util.Observer;
 import model.Coordinate;
 import model.GameEngine;
 import model.MobsManager;
-import model.ships.Ship;
 import model.spawning.SpawnLogic;
 import model.spawning.Spawner;
 
@@ -31,6 +31,7 @@ public class GameActivity extends Activity implements Observer {
 
     private GameSurface surface;
     private GameRenderer renderer;
+    private GameHud hud;
     private Spawner spawner;
     private GameEngine gameEngine;
     private Thread spawnerThread;
@@ -53,7 +54,17 @@ public class GameActivity extends Activity implements Observer {
         initAudio();
 
         setContentView(surface);
+        addContentView(hud, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        startThreads();
+
+    }
+
+    public void startThreads(){
         spawnerThread.start();
         gameEngineThread.start();
     }
@@ -67,14 +78,15 @@ public class GameActivity extends Activity implements Observer {
 
         GameCamera camera = new GameCamera(new Coordinate(0.0f, 1.0f, 2.0f), cameraCoordinate);
 
-        Light sunLight = new Light(new Coordinate(0.0f, 20.0f, 20.0f));
-
         surface = new GameSurface(this);
-        renderer = new GameRenderer(this, mobsManager, camera,sunLight, ship );
+        renderer = new GameRenderer(this, mobsManager, camera, ship );
         surface.setRenderer(renderer);
 
-        Rect bound = new Rect(-3, -3, 3, 3);
-        surface.setOnTouchListener(new FreeTouchController(this, ship, camera, bound, 0.08f));
+        hud = new GameHud(this, gameEngine.getScoreCalculator() );
+
+
+        Rect bound = new Rect(-2, -1, 2, 2);
+        surface.setOnTouchListener(new FreeTouchController(this, ship, bound, 0.08f));
     }
 
     private void initGameElements() {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ship_model_path">realShip.obj</string>
+    <string name="ship_texture_path">carbon.png</string>
+
+    <string name="mob_model_path">realMob.obj</string>
+    <string name="mob_texture_path">blue.jpg</string>
+
+    <string name="stand_model_path">stand.obj</string>
+    <string name="stand_texture_path">metal.png</string>
+</resources>

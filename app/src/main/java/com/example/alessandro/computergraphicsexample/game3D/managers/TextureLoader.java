@@ -47,7 +47,11 @@ public class TextureLoader {
             e.printStackTrace();
         }
 
-        return createTexture(textureBitmap);
+        int textureID = createTexture(textureBitmap);
+
+        textureBitmap.recycle();
+
+        return textureID;
 
     }
 

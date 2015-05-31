@@ -27,12 +27,10 @@ public class GameCamera {
     public GameCamera(Coordinate cameraPosition, Coordinate centrePosition) {
         this.cameraPosition = cameraPosition;
         this.centrePosition = centrePosition;
-
         needNewMatrix = true;
     }
 
     public float[] getViewMatrix() {
-
         if(needNewMatrix){
             Matrix.setLookAtM(mViewMatrix, 0,
                     cameraPosition.getX(),
@@ -44,10 +42,10 @@ public class GameCamera {
                     0f, 1.0f, 0.0f);    //Teniamo fisso il l'asse Y (positivo) come UP.
             needNewMatrix = false;
         }
-
         return mViewMatrix;
     }
 
+    //TODO: Valutare lo spostamento della telecamera. Se non viene effettuato eliminare la classe..
     public void shiftY(float shiftAmount){
         centrePosition.setY(centrePosition.getY() + shiftAmount);
         cameraPosition.setY(cameraPosition.getY() + shiftAmount);

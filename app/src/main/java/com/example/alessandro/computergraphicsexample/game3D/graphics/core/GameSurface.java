@@ -4,11 +4,11 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
+import com.example.alessandro.computergraphicsexample.game3D.util.GameUtil;
+
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
-
-import com.example.alessandro.computergraphicsexample.game3D.util.GameUtil;
 
 
 /**
