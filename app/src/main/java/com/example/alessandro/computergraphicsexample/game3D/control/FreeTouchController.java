@@ -123,18 +123,11 @@ public class FreeTouchController implements View.OnTouchListener {
 
         float delta = ((startValue - coordinateComponenteValue ) / mDensity / 2f ) * SHIFT_SCALE;
 
-
-        Log.e("FreeTouchController", maxModulo+"");
-
-
-        //Per alleggerire il carico cpu non chiamo Math.abs() e Math.sign();
         if( delta > maxModulo ){
             delta = maxModulo;
         }else if( delta < -maxModulo){
             delta = -maxModulo;
         }
-
-
 
         return delta;
     }
