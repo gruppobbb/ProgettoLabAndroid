@@ -180,7 +180,7 @@ public class ObjLoader {
     private Vector2f currentTex;
     private Vector3f currentNorm;
 
-    /**
+    /*
      * Metodo che effettua il parsing delle colonne nelle righe riguardanti le face,
      * mettendo in ordine gli indici.
      * @param vertexData
@@ -220,9 +220,6 @@ public class ObjLoader {
             normalData[currentVertexPointer*3+2] = currentNorm.z;
         }
     }
-
-
-
 
     private class Vector2f{
         float x;

@@ -6,6 +6,7 @@ import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 
 /**
+ * Modello 3D dello stand.
  * @author Jancarlos.
  */
 public class StandModel extends Model {
@@ -18,7 +19,5 @@ public class StandModel extends Model {
 
         setShineDamper(10f);
         setReflectivity(1.0f);
-
     }
-
 }

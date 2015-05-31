@@ -9,7 +9,7 @@ import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 /**
- * Classe che contiene la descrizione diun oggetto per OpenGL.
+ * Classe che contiene la descrizione di un oggetto per OpenGL.
  * Created by Jancarlos.
  */
 public class ModelData {

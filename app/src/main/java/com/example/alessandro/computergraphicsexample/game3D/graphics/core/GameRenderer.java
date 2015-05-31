@@ -26,7 +26,10 @@ import model.MobsManager;
 import model.mobs.Mob;
 
 /**
- * @author Jancarlos.
+* Renderer ottimizzato per il disegno di una modalità singleplayer con N {@link Mob3D}
+* recuperati dal {@link MobsManager}, con una inquadratura definita dalla {@link GameCamera},
+* con una {@link Ship3D} controllata dal giocatore.
+ * @author Jancarlos
  */
 public class GameRenderer implements GLSurfaceView.Renderer{
 
@@ -46,9 +49,6 @@ public class GameRenderer implements GLSurfaceView.Renderer{
     private ShaderProgram program;
 
     /**
-     * Renderer ottimizzato per il disegno di una modalità singleplayer con N {@link Mob3D}
-     * recuperati dal {@link MobsManager}, con una inquadratura definita dalla {@link GameCamera},
-     * con una {@link Ship3D} controllata dal giocatore.
      * @param context context dell'activity in cui viene istanziato il Renderer
      * @param mobsManager componente contente tutte le istanze dei mob da disegnare
      * @param camera componente che deifinisce la posizione i dati della telecamera
@@ -141,8 +141,8 @@ public class GameRenderer implements GLSurfaceView.Renderer{
     }
 
 
-    /**
-     * Disegno dei Mobs, recuperati al {@link MobsManager}
+    /*
+     * Disegno dei Mobs, recuperati dal {@link MobsManager}
      */
     private void drawMobs(){
 
