@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><scores>
+    <entry no="1">
+        <player>Dave</player>
+        <score>990000</score>
+    </entry>
+    <entry no="2">
+        <player>Mark</player>
+        <score>950000</score>
+    </entry>
+    <entry no="3">
+        <player>AAA</player>
+        <score>120000</score>
+    </entry>
+    <entry no="4">
+        <player>John</player>
+        <score>90000</score>
+    </entry>
+    <entry no="5">
+        <player>AAA</player>
+        <score>80000</score>
+    </entry>
+    <entry no="6">
+        <player>AAA</player>
+        <score>66550</score>
+    </entry>
+    <entry no="7">
+        <player>Jean</player>
+        <score>40000</score>
+    </entry>
+    <entry no="8">
+        <player>AAA</player>
+        <score>12950</score>
+    </entry>
+    <entry no="9">
+        <player>Sascha</player>
+        <score>8800</score>
+    </entry>
+    <entry no="10">
+        <player>Pino</player>
+        <score>5092</score>
+    </entry>
+</scores>

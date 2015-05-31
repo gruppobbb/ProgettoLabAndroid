@@ -24,6 +24,9 @@ import java.util.Observer;
 import model.Coordinate;
 import model.GameEngine;
 import model.MobsManager;
+import model.scores.LocalScoreManager;
+import model.scores.ManagerKeeper;
+import model.scores.XMLLocalStatsManager;
 import model.spawning.SpawnLogic;
 import model.spawning.Spawner;
 
@@ -89,6 +92,9 @@ public class GameActivity extends Activity implements Observer {
     }
 
     private void initGameElements() {
+        ManagerKeeper.getInstance().setLocalStats(new XMLLocalStatsManager("localstats.xml"));
+        ManagerKeeper.getInstance().setScoreManager(new LocalScoreManager("scorelist.xml"));
+
         shipCoordinate = new Coordinate(0.0f, 0.0f, 0.0f);
         ship = new Ship3D(shipCoordinate, 0.75);
 

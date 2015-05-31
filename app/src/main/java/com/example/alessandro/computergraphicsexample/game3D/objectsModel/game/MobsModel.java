@@ -2,6 +2,7 @@ package com.example.alessandro.computergraphicsexample.game3D.objectsModel.game;
 
 import android.content.Context;
 
+import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 
 /**
@@ -13,7 +14,8 @@ public class MobsModel extends Model {
 
     public MobsModel(Context context) {
 
-        super("realMob.obj", "blue.jpg");
+        super(context.getString(R.string.mob_model_path),
+                context.getString(R.string.mob_texture_path));
 
         setShineDamper(10.0f);
 
