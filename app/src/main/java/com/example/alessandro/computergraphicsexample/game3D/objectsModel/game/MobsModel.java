@@ -13,6 +13,9 @@ public class MobsModel extends Model {
 
     public static final String MODEL_ID = "MobsModel";
 
+    /**
+     * @param context
+     */
     public MobsModel(Context context) {
 
         super(context.getString(R.string.mob_model_path),

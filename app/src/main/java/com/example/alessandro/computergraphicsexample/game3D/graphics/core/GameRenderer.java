@@ -26,8 +26,10 @@ import model.MobsManager;
 import model.mobs.Mob;
 
 /**
- * Renderer del gioco, che si occupa del disegno dei {@link MobsModel} e del {@link ShipModel}.
- * @author Jancarlos.
+* Renderer ottimizzato per il disegno di una modalità singleplayer con N {@link Mob3D}
+* recuperati dal {@link MobsManager}, con una inquadratura definita dalla {@link GameCamera},
+* con una {@link Ship3D} controllata dal giocatore.
+ * @author Jancarlos
  */
 public class GameRenderer implements GLSurfaceView.Renderer{
 
@@ -82,10 +84,7 @@ public class GameRenderer implements GLSurfaceView.Renderer{
 
     }
 
-    /*
-    Inizializzazione dei modelli.
-     */
-    private void initModels(){
+    public void initModels(){
         //caricamento e assemblaggio dei modelli
 
         modelManager = ModelManager.getInstance();
@@ -146,7 +145,7 @@ public class GameRenderer implements GLSurfaceView.Renderer{
 
 
     /*
-     Disegno dei Mobs, recuperati al MobsManager.
+     * Disegno dei Mobs, recuperati dal {@link MobsManager}
      */
     private void drawMobs(){
 
@@ -167,9 +166,7 @@ public class GameRenderer implements GLSurfaceView.Renderer{
         }
     }
 
-    /*
-    Disegno della ship.
-     */
+
     private void drawShip(){
         program.loadPerModelUniform(shipModel);
         program.loadModelMatrix(ship.getModelMatrix());
