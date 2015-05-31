@@ -6,7 +6,7 @@ import android.opengl.Matrix;
 
 import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
-import com.example.alessandro.computergraphicsexample.game3D.objectsModel.obj.ModelData;
+import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelData;
 
 
 /**
