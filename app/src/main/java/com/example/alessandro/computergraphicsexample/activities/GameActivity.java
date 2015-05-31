@@ -95,7 +95,7 @@ public class GameActivity extends Activity implements Observer {
         mobsManager = new MobsManager();
 
         //SPAWNER
-        SpawnLogic spawnLogic = new MoreDenseSpawnLogic(ship, 6.0f, 7, -60f);
+        SpawnLogic spawnLogic = new MoreDenseSpawnLogic(ship, 6.0f, 3, -60f);
         spawner = new Spawner(mobsManager, spawnLogic);
         spawner.setSleepTime(500);
         spawnerThread = new Thread(spawner);
