@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.alessandro.computergraphicsexample.game3D.managers.TextureLoader;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelBuilder;
+import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelData;
 
 /**
  * Created by Jancarlos.

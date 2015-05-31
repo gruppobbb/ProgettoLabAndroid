@@ -3,6 +3,7 @@ package com.example.alessandro.computergraphicsexample.game3D.control;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -28,7 +29,7 @@ public class FreeTouchController implements View.OnTouchListener {
 
     private Timer cTimer;
     private static final long DELAY = 30;
-    private static final float SHIFT_SCALE = 0.03F;
+    private static final float SHIFT_SCALE = 0.03f;
     private static final float MAX_MODULO_CAP = 0.08f;
 
     /**
@@ -48,9 +49,11 @@ public class FreeTouchController implements View.OnTouchListener {
         minY = bound.top;
         maxY = bound.bottom;
 
-        if(maxModulo < 0 || maxModulo > MAX_MODULO_CAP){
-            this.maxModulo = MAX_MODULO_CAP;
+        if(maxModulo <= 0 || maxModulo > MAX_MODULO_CAP){
+            maxModulo = MAX_MODULO_CAP;
         }
+
+        this.maxModulo = maxModulo;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -77,7 +80,7 @@ public class FreeTouchController implements View.OnTouchListener {
 
             case MotionEvent.ACTION_MOVE: {
                 deltaX =  -chackDelta(startX, motionEvent.getX());
-                deltaY = chackDelta(startX, motionEvent.getY());
+                deltaY = chackDelta(startY, motionEvent.getY());
                 break;
             }
 
@@ -120,12 +123,19 @@ public class FreeTouchController implements View.OnTouchListener {
 
         float delta = ((startValue - coordinateComponenteValue ) / mDensity / 2f ) * SHIFT_SCALE;
 
+
+        Log.e("FreeTouchController", maxModulo+"");
+
+
         //Per alleggerire il carico cpu non chiamo Math.abs() e Math.sign();
         if( delta > maxModulo ){
             delta = maxModulo;
         }else if( delta < -maxModulo){
             delta = -maxModulo;
         }
+
+
+
         return delta;
     }
 }

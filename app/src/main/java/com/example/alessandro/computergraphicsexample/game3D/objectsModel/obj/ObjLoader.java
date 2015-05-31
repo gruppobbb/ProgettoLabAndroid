@@ -3,6 +3,8 @@ package com.example.alessandro.computergraphicsexample.game3D.objectsModel.obj;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelData;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

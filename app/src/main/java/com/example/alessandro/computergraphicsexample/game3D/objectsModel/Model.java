@@ -1,7 +1,6 @@
 package com.example.alessandro.computergraphicsexample.game3D.objectsModel;
 
 import com.example.alessandro.computergraphicsexample.game3D.graphics.shader.ShaderProgram;
-import com.example.alessandro.computergraphicsexample.game3D.objectsModel.obj.ModelData;
 
 /**
  * Created by Jancarlos.

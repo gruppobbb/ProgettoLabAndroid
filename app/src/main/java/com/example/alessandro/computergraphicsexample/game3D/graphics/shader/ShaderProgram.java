@@ -6,7 +6,7 @@ import android.content.Context;
 import com.example.alessandro.computergraphicsexample.game3D.managers.JShaderManager;
 import com.example.alessandro.computergraphicsexample.game3D.managers.JTextFileManager;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
-import com.example.alessandro.computergraphicsexample.game3D.objectsModel.obj.ModelData;
+import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelData;
 
 /**
  * Created by Jancarlos.

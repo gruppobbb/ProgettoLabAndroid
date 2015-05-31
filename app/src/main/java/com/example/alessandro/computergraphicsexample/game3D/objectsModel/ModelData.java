@@ -1,4 +1,4 @@
-package com.example.alessandro.computergraphicsexample.game3D.objectsModel.obj;
+package com.example.alessandro.computergraphicsexample.game3D.objectsModel;
 
 import android.opengl.GLES20;
 import android.util.Log;
@@ -66,11 +66,8 @@ public class ModelData {
         indicesBuffer = loadShortBuffer(indicesData);
 
         indexCount = (short)indicesData.length;
-        Log.e("ModelData", objectName + " indexCount " + indexCount);
+        //Log.e("ModelData", objectName + " indexCount " + indexCount);
     }
-
-
-    //TODO: vedere se cosi' gli piace o se se bisogna usare return...
 
 
     /**
@@ -157,11 +154,6 @@ public class ModelData {
         GLES20.glEnableVertexAttribArray(normalLocation);
         normalBuffer.position(0);
 
-    }
-
-
-    public String getObjectName() {
-        return objectName;
     }
 
     public FloatBuffer getTextureBuffer() {
