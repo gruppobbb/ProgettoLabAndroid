@@ -63,7 +63,7 @@ public class GameSurface extends GLSurfaceView {
         }
     }
 
-    /**
+    /*
      * Classe che definisce le impostazioni utili per l'abilitazione del multisempling ( antialiasing ) .
      */
     private class GameSurfaceConfigChooser implements EGLConfigChooser{

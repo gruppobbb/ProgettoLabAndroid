@@ -4,7 +4,8 @@ import android.opengl.GLES20;
 import android.util.Log;
 
 /**
- * Created by Jancarlos.
+ * Manager per gli shader.
+ * @author Jancarlos.
  */
 public class ShaderManager {
 
@@ -87,12 +88,12 @@ public class ShaderManager {
      * @param vertexShaderID reference al file oggetto del VertexShader.
      * @param fragmentShaderID reference al file oggetto del FRamgmenShader.
      * @return reference al file oggetto del programma con i due shader linkati.
-     * NOOTA: Devono lavorare sempre in coppia:
+     * NOTA: Devono lavorare sempre in coppia:
      * - Senza FragmenteShader, una volta calcolata la posizone finale
      *   dei vertici OpenGL non sapra' come coloarli
      * - Senza VertexShader, OpenGL non saprà dove posizione i fragment* .
-     *
-     * *Brevemente: Un fragment non è esattamente "un pixel", ma per rendere l'idea si può fare il paragone.
+     */
+     /*Brevemente: Un fragment non è esattamente "un pixel", ma per rendere l'idea si può fare il paragone.
      *  In realta' un fragmente non è altro che una cella su cui viene disegnato UN colore ( come i pixel... )
      *  con la differenza che questa cella e' di dimensioni variabili, e segue la geometria del poligono,
      *  mentre il pixel lo si ottiene tramite proiezione da 3D a 2D sullo Schermo.

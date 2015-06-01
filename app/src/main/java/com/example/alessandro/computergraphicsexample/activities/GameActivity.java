@@ -30,6 +30,10 @@ import model.scores.XMLLocalStatsManager;
 import model.spawning.SpawnLogic;
 import model.spawning.Spawner;
 
+/**
+ * Activity di gioco, che viene avviata all'inizio di ogni partita e ne permette lo svolgimento.
+ * @author Max, Jancarlos
+ */
 public class GameActivity extends Activity implements Observer {
 
     private GameSurface surface;

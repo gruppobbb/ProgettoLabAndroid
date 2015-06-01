@@ -10,7 +10,6 @@ import com.example.alessandro.computergraphicsexample.game3D.objectsModel.ModelD
 
 
 /**
- *
  * Shader con sia effetti di luce ambientale di che di luce speculare.
  * Created by Jancarlos.
  */
@@ -33,6 +32,7 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     /**
      * Costruttore di un program per l'utilizzo di textures.
+     * @param context
      */
     public CompleteShaderProgram(Context context){
         super(context, R.raw.diffuse_specular_vertex_shader, R.raw.diffuse_specular_fragment_shader);
@@ -55,6 +55,10 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     }
 
+    /**
+     * @see ShaderProgram
+     * @param data
+     */
     @Override
     public void bindData(ModelData data) {
         data.directSetVertexAttributePointer(aPositionLocation);
@@ -71,12 +75,20 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     float[] mInverseViewMatrix = new float[16];
 
+    /**
+     * @see ShaderProgram
+     * @param mProjectionMatrix
+     */
     @Override
     public void loadProjectionMatrix(float[] mProjectionMatrix) {
         //Passaggio della matrice di Proiezione
         GLES20.glUniformMatrix4fv(u_ProjectionMatrixLocation, 1, false, mProjectionMatrix, 0);
     }
 
+    /**
+     * @see ShaderProgram
+     * @param mViewMatrix
+     */
     @Override
     public void loadViewMatrix(float[] mViewMatrix) {
         //Passaggio della view matrix
@@ -93,6 +105,10 @@ public class CompleteShaderProgram extends ShaderProgram {
          */
     }
 
+    /**
+     * @see ShaderProgram
+     * @param model
+     */
     @Override
     public void loadPerModelUniform(Model model){
 
@@ -114,6 +130,10 @@ public class CompleteShaderProgram extends ShaderProgram {
         GLES20.glUniform1f(u_ReflectivityLocation, model.getReflectivity());
     }
 
+    /**
+     * @see ShaderProgram
+     * @param modelMatrix
+     */
     @Override
     public void loadModelMatrix(float[] modelMatrix){
         //Passaggio della model matrix

@@ -151,18 +151,34 @@ public class ModelData {
         normalBuffer.position(0);
     }
 
+    /**
+     * Restituisce il {@link FloatBuffer} associato ai dati delle texture.
+     * @return buffer delle texture
+     */
     public FloatBuffer getTextureBuffer() {
         return textureBuffer;
     }
 
+    /**
+     * Restituisce il {@link FloatBuffer} associato ai dati della normal map.
+     * @return buffer
+     */
     public FloatBuffer getNormalBuffer() {
         return normalBuffer;
     }
 
+    /**
+     * Restituisce lo {@link ShortBuffer} associato agli indici dei vertici.
+     * @return buffer
+     */
     public ShortBuffer getIndicesBuffer() {
         return indicesBuffer;
     }
 
+    /**
+     * Restituisce il numero totale degli indici.
+     * @return numero totale di indici
+     */
     public short getIndicesCount(){
         return indexCount;
     }

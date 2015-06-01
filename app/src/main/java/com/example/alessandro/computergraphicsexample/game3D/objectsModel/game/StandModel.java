@@ -13,6 +13,9 @@ public class StandModel extends Model {
 
     public static final String MODEL_ID = "StandModel";
 
+    /**
+     * @param context
+     */
     public StandModel(Context context) {
         super(context.getString(R.string.stand_model_path),
                 context.getString(R.string.stand_texture_path));

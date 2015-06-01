@@ -84,6 +84,9 @@ public class GameRenderer implements GLSurfaceView.Renderer{
 
     }
 
+    /**
+     * Carica e inizializza i modelli da renderizzare.
+     */
     public void initModels(){
         //caricamento e assemblaggio dei modelli
 

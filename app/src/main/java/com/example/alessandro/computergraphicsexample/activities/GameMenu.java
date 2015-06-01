@@ -14,6 +14,7 @@ import com.example.alessandro.computergraphicsexample.game3D.graphics.core.MenuR
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.MenuSurface;
 
 /**
+ * Activity che contiene il menù principale.
  * @author Jancarlos.
  */
 public class GameMenu extends ActionBarActivity {
@@ -42,18 +43,14 @@ public class GameMenu extends ActionBarActivity {
         button.setTypeface(font);
     }
 
-    public void handleButtonPress(View view){
+    private void handleButtonPress(View view){
 
         Intent intent;
-
         switch (view.getId()) {
-
             case R.id.new_game_button:
                 intent = new Intent(this, GameActivity.class);
                 break;
-
             default: return;
-
         }
 
         if(intent != null ){

@@ -63,6 +63,11 @@ public class FreeTouchController implements View.OnTouchListener {
 
     }
 
+    /**@see android.view.View.OnTouchListener
+     * @param view
+     * @param motionEvent
+     * @return
+     */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
