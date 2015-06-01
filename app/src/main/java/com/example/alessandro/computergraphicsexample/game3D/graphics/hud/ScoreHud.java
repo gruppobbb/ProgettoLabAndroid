@@ -60,22 +60,17 @@ public class ScoreHud extends SurfaceView  implements Observer{
      */
     private void drawScore(){
 
-        long score = scoreCalculator.getScore();
+        Canvas canvas = holder.lockCanvas();
+        if(canvas != null ){
 
-        if(score >= nextValidScore){
-            Canvas canvas = holder.lockCanvas();
-            if(canvas != null ){
+            canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
-                canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+            canvas.drawText("Punteggio: " + scoreCalculator.getScore(),
+                    xScoreDraw,
+                    yScoreDraw,
+                    pointsPaint);
 
-                canvas.drawText("Punteggio: " + score,
-                        xScoreDraw,
-                        yScoreDraw,
-                        pointsPaint);
-
-                nextValidScore = score+1000;
-                holder.unlockCanvasAndPost(canvas);
-            }
+            holder.unlockCanvasAndPost(canvas);
         }
     }
 
