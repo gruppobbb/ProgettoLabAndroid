@@ -44,6 +44,9 @@ public class MenuRenderer implements GLSurfaceView.Renderer {
     private ShaderProgram program;
     private ModelBuilder builder;
 
+    /**
+     * @param context
+     */
     public MenuRenderer(Context context) {
         this.context = context;
         Coordinate shipCoordinate = new Coordinate(0.0f, 0.0f, 0.0f);
@@ -78,8 +81,8 @@ public class MenuRenderer implements GLSurfaceView.Renderer {
         preloadMobs();
     }
 
-    /*
-    Inizializzaizone modelli.
+    /**
+     * Carica e inizializza i modelli da renderizzare.
      */
     public void init(){
 

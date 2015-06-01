@@ -30,6 +30,10 @@ public class GameCamera {
         needNewMatrix = true;
     }
 
+    /**
+     * Restituisce la view matrix della telecamera.
+     * @return view matrix
+     */
     public float[] getViewMatrix() {
         if(needNewMatrix){
             Matrix.setLookAtM(mViewMatrix, 0,
@@ -44,12 +48,4 @@ public class GameCamera {
         }
         return mViewMatrix;
     }
-
-    //TODO: Valutare lo spostamento della telecamera. Se non viene effettuato eliminare la classe..
-    public void shiftY(float shiftAmount){
-        centrePosition.setY(centrePosition.getY() + shiftAmount);
-        cameraPosition.setY(cameraPosition.getY() + shiftAmount);
-        needNewMatrix = true;
-    }
-
 }

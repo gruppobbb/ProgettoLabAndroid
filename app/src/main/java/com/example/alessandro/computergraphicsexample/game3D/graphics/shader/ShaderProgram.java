@@ -30,6 +30,11 @@ public abstract class ShaderProgram {
 
     private int program;
 
+    /**
+     * @param context
+     * @param vertexShaderResourceID ID della risorsa contenente il sorgente del vertex shader
+     * @param fragmentShaderResourceID ID della risorsa contenente il sorgente del fragment shader
+     */
     public ShaderProgram(Context context, int vertexShaderResourceID,
                          int fragmentShaderResourceID){
 
@@ -39,6 +44,10 @@ public abstract class ShaderProgram {
         );
     }
 
+    /**
+     * Restituisce l'ID univoco del programma.
+     * @return
+     */
     public int getProgramID() {
         return program;
     }

@@ -10,6 +10,9 @@ import android.opengl.GLSurfaceView;
  */
 public class MenuSurface extends GLSurfaceView {
 
+    /**
+     * @param context
+     */
     public MenuSurface(Context context) {
         super(context);
         setEGLContextClientVersion(2);
