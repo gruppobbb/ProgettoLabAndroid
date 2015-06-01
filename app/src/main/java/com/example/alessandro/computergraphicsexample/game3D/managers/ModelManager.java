@@ -51,10 +51,7 @@ public class ModelManager {
      * @return modello
      */
     public Model getModel(String modelID){
-        if(containsModel(modelID))
-            return models.get(modelID);
-        else
-            throw new Resources.NotFoundException();
+        return models.get(modelID);
     }
 
     /**

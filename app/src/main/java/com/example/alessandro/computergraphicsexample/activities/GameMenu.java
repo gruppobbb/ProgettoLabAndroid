@@ -43,7 +43,11 @@ public class GameMenu extends ActionBarActivity {
         button.setTypeface(font);
     }
 
-    private void handleButtonPress(View view){
+    /**
+     * Gestisce la pressione dei bottoni.
+     * @param view
+     */
+    public void handleButtonPress(View view){
 
         Intent intent;
         switch (view.getId()) {
