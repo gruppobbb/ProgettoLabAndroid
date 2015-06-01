@@ -9,4 +9,6 @@
 
     <string name="stand_model_path">stand.obj</string>
     <string name="stand_texture_path">metal.png</string>
+
+    <string name="button_font">fonts/origami.ttf</string>
 </resources>

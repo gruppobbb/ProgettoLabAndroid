@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.MenuRenderer;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.MenuSurface;
+import com.example.alessandro.computergraphicsexample.game3D.managers.ScreenManager;
 
 /**
  * @author Jancarlos.
@@ -32,22 +33,19 @@ public class GameMenu extends ActionBarActivity {
         addContentView(menuSurface, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
-        //Abilitazione del FullScreen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //Attivazione FullScreen.
+        ScreenManager.goFullScreen(this);
 
         //Setting del font nel/nei Button
         Button button = (Button)findViewById(R.id.new_game_button);
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/origami.ttf");
+        Typeface font = Typeface.createFromAsset(getAssets(), getString(R.string.button_font));
         button.setTypeface(font);
     }
 
     public void handleButtonPress(View view){
 
         Intent intent;
-
         switch (view.getId()) {
-
             case R.id.new_game_button:
                 intent = new Intent(this, GameActivity.class);
                 break;
@@ -56,9 +54,7 @@ public class GameMenu extends ActionBarActivity {
 
         }
 
-        if(intent != null ){
-            this.startActivity(intent);
-        }
+        this.startActivity(intent);
 
     }
 

@@ -17,6 +17,7 @@ import com.example.alessandro.computergraphicsexample.game3D.entities.Ship3D;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameRenderer;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.core.GameSurface;
 import com.example.alessandro.computergraphicsexample.game3D.graphics.hud.ScoreHud;
+import com.example.alessandro.computergraphicsexample.game3D.managers.ScreenManager;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -59,8 +60,8 @@ public class GameActivity extends Activity implements Observer {
         addContentView(hud, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //Attivazione FullScreen.
+        ScreenManager.goFullScreen(this);
 
         startThreads();
 
