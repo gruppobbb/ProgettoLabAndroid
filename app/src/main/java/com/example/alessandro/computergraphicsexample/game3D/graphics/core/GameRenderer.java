@@ -68,7 +68,7 @@ public class GameRenderer implements GLSurfaceView.Renderer{
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         //Colore di default dopo ogni cancellazione.
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
         //Controllo delle face oscurate/nascoste ( quelle che non si possono vedere non vengono renderizzate ).
         GLES20.glEnable(GLES20.GL_CULL_FACE);

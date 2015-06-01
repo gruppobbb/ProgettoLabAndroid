@@ -33,9 +33,6 @@ public class GameMenu extends ActionBarActivity {
         addContentView(menuSurface, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
-        //Attivazione FullScreen.
-        ScreenManager.goFullScreen(this);
-
         //Setting del font nel/nei Button
         Button button = (Button)findViewById(R.id.new_game_button);
         Typeface font = Typeface.createFromAsset(getAssets(), getString(R.string.button_font));
@@ -62,6 +59,9 @@ public class GameMenu extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         menuSurface.onResume();
+
+        //Attivazione FullScreen.
+        ScreenManager.goFullScreen(this);
     }
 
     @Override
