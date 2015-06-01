@@ -60,6 +60,9 @@ public class GameActivity extends Activity implements Observer {
 
         initAudio();
 
+        //Attivazione FullScreen.
+        ScreenManager.goFullScreen(this);
+
         setContentView(hud);
         addContentView(surface, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
@@ -136,8 +139,6 @@ public class GameActivity extends Activity implements Observer {
         spawner.onResume();
         backgroundPlayer.play();
 
-        //Attivazione FullScreen.
-        ScreenManager.goFullScreen(this);
 
     }
 

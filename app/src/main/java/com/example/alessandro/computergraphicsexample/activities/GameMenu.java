@@ -26,6 +26,9 @@ public class GameMenu extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Attivazione FullScreen.
+        ScreenManager.goFullScreen(this);
+
         setContentView(R.layout.activity_game_menu);
 
         //Setting di una GLSurfaceView in overlay
@@ -63,8 +66,6 @@ public class GameMenu extends ActionBarActivity {
         super.onResume();
         menuSurface.onResume();
 
-        //Attivazione FullScreen.
-        ScreenManager.goFullScreen(this);
     }
 
     @Override
