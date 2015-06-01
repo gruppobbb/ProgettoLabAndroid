@@ -37,9 +37,9 @@ public class ModelManager {
     }
 
     /**
-     * Controlla se il modello associato all'identificatore modelID è già presente.
+     * Controlla se il modello associato all'identificatore modelID ï¿½ giï¿½ presente.
      * @param modelID identificatore del modello
-     * @return true o false, rispettivamente se il modello è presente o no
+     * @return true o false, rispettivamente se il modello ï¿½ presente o no
      */
     public boolean containsModel(String modelID){
         return models.containsKey(modelID);
@@ -51,10 +51,7 @@ public class ModelManager {
      * @return modello
      */
     public Model getModel(String modelID){
-        if(containsModel(modelID))
-            return models.get(modelID);
-        else
-            throw new Resources.NotFoundException();
+        return models.get(modelID);
     }
 
     /**

@@ -15,7 +15,7 @@ import com.example.alessandro.computergraphicsexample.game3D.graphics.core.MenuS
 import com.example.alessandro.computergraphicsexample.game3D.managers.ScreenManager;
 
 /**
- * Activity che contiene il menù principale.
+ * Activity che contiene il menu' principale.
  * @author Jancarlos.
  */
 public class GameMenu extends ActionBarActivity {
@@ -40,7 +40,7 @@ public class GameMenu extends ActionBarActivity {
         button.setTypeface(font);
     }
 
-    private void handleButtonPress(View view){
+    public void handleButtonPress(View view){
 
         Intent intent;
         switch (view.getId()) {
