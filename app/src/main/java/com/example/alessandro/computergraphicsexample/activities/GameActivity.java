@@ -85,13 +85,10 @@ public class GameActivity extends Activity implements Observer {
         surface = new GameSurface(this);
         renderer = new GameRenderer(this, mobsManager, camera, ship );
 
-
-        //##########
         surface.setZOrderOnTop(true);
         surface.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
         surface.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         surface.setRenderer(renderer);
-        //##########
 
         hud = new ScoreHud(this, gameEngine.getScoreCalculator() );
         hud.setBackgroundResource(R.drawable.black_space);
