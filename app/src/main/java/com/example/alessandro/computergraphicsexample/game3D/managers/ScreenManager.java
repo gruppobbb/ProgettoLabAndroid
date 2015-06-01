@@ -26,18 +26,11 @@ public class ScreenManager {
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
             activity.getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
-        }else if ( hasJellyBean() ) {
-            activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
     }
 
     public static boolean hasKitKat() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-    }
-
-    public static boolean hasJellyBean() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
 
 }
