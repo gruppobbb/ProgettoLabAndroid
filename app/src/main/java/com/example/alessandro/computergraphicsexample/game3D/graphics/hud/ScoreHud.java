@@ -55,7 +55,6 @@ public class ScoreHud extends SurfaceView  implements Observer{
 
     }
 
-
     /*
     Disegno dello score.
      */
