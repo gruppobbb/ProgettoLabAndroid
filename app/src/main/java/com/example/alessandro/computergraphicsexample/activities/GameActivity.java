@@ -2,10 +2,10 @@ package com.example.alessandro.computergraphicsexample.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.audio.AudioManager;
@@ -60,12 +60,9 @@ public class GameActivity extends Activity implements Observer {
 
         initAudio();
 
-        setContentView(surface);
-        addContentView(hud, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        setContentView(hud);
+        addContentView(surface, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-
-        //Attivazione FullScreen.
-        ScreenManager.goFullScreen(this);
 
         startThreads();
 
@@ -87,9 +84,17 @@ public class GameActivity extends Activity implements Observer {
 
         surface = new GameSurface(this);
         renderer = new GameRenderer(this, mobsManager, camera, ship );
+
+
+        //##########
+        surface.setZOrderOnTop(true);
+        surface.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+        surface.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         surface.setRenderer(renderer);
+        //##########
 
         hud = new ScoreHud(this, gameEngine.getScoreCalculator() );
+        hud.setBackgroundResource(R.drawable.black_space);
 
 
         Rect bound = new Rect(-2, -1, 2, 2);
@@ -133,6 +138,9 @@ public class GameActivity extends Activity implements Observer {
         gameEngine.onResume();
         spawner.onResume();
         backgroundPlayer.play();
+
+        //Attivazione FullScreen.
+        ScreenManager.goFullScreen(this);
 
     }
 

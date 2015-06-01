@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.alessandro.computergraphicsexample.R;
 import com.example.alessandro.computergraphicsexample.game3D.objectsModel.Model;
 
+import model.mobs.Mob;
+
 /**
  * {@link Model} impostato per il caricamento e setting del modello 3d dello Stand.
  * @author Jancarlos.
@@ -14,7 +16,8 @@ public class StandModel extends Model {
     public static final String MODEL_ID = "StandModel";
 
     /**
-     * @param context
+     *Costruisce un {@link Model} per il disegno di uno Stand.
+     * @param context context context activity nel quale si sta istanziando il modello.
      */
     public StandModel(Context context) {
         super(context.getString(R.string.stand_model_path),

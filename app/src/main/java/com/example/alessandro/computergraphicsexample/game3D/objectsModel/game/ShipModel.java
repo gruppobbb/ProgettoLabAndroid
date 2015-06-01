@@ -14,7 +14,8 @@ public class ShipModel extends Model {
     public static final String MODEL_ID = "ShipModel";
 
     /**
-     * @param context
+     * Costruisce un {@link Model} per il disegno di una {@link model.ships.Ship}
+     * @param context context context activity nel quale si sta istanziando il modello.
      */
     public ShipModel(Context context) {
 
