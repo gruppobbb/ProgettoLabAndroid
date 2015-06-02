@@ -5,8 +5,11 @@ import android.opengl.Matrix;
 import model.Coordinate;
 
 /**
+ * Modello di una stand contenente le informazioni per la rappresentazione di un Nodo
+ * in una determinata posizione e con una determinata trasformazione.
  * @author Jancarlos.
  */
+
 public class Stand3D {
 
     private Coordinate coord;

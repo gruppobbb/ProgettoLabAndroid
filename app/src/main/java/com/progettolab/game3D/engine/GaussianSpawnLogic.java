@@ -12,7 +12,7 @@ import model.spawning.SpawnLogic;
 /**
  * @author Max
  * Logica di spawning che si basa sull'utilizzo di variabili casuali gaussiane per generare le coordinate dei nuovi mob.
- * Tali variabili sono centrate nei valori x e y della ship ed hanno una deviazione standard stdev specificata.
+ * Tali variabili sono centrate nei valori x e y della ship ed hanno una deviazione standard specificata.
  */
 public class GaussianSpawnLogic implements SpawnLogic  {
 

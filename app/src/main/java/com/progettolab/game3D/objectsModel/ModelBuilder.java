@@ -1,7 +1,8 @@
 package com.progettolab.game3D.objectsModel;
 
 /**
- * Created by Jancarlos.
+ * Interfaccia che astrae sul modo in cui sono assemblati i modelli 3D.
+ * @author Jancarlos.
  */
 public interface ModelBuilder {
 
