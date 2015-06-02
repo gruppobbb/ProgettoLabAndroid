@@ -7,8 +7,8 @@ public interface ModelBuilder {
 
     /**
      * Metodo per il caricamento e assegnazione di modello 3D e texture per un {@link Model}.
-     * @param model
+     * @param model Modello 3D
      */
-    public void buildModel(Model model);
+    void buildModel(Model model);
 
 }

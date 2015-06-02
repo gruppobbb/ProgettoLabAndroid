@@ -13,11 +13,10 @@ public class GameUtil {
      * @return true se si sta eseguendo l'app nell'emulatore.
      */
     public static boolean checkIfIsRunningInEmulator(){
-        boolean runningInEmulator =(Build.MODEL.contains("google_sdk")
+        return (Build.MODEL.contains("google_sdk")
                 || Build.MODEL.contains("Emulator")
                 || Build.MODEL.contains("Android SDK built for x86")
         );
-        return runningInEmulator;
     }
 
 }

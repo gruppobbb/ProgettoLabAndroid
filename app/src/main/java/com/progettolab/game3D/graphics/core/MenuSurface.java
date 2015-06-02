@@ -11,7 +11,7 @@ import android.opengl.GLSurfaceView;
 public class MenuSurface extends GLSurfaceView {
 
     /**
-     * @param context
+     * @param context Contesto
      */
     public MenuSurface(Context context) {
         super(context);

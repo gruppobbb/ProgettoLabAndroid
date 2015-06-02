@@ -45,7 +45,7 @@ public class MenuRenderer implements GLSurfaceView.Renderer {
     private ModelBuilder builder;
 
     /**
-     * @param context
+     * @param context Contesto
      */
     public MenuRenderer(Context context) {
         this.context = context;

@@ -66,9 +66,9 @@ public class Ship3D extends Ship{
 
     /**
      * Riposizionamento del centro del modello della ship in un nuovo punto.
-     * @param newX
-     * @param newY
-     * @param newZ
+     * @param newX Coordinata X
+     * @param newY Coordinata Y
+     * @param newZ Coordinata Z
      */
     public void setTraslation(float newX, float newY, float newZ){
 

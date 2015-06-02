@@ -15,7 +15,7 @@ public class TextFileManager {
 
     /**
      * Lettura di un file di testo per il salvataggio del contenuto in un unica stringa di caratteri.
-     * @param context
+     * @param context Contesto
      * @param resourceID identificativo nelle resurces del file da leggere.
      * @return stringa di caratteri contenente tutto il contenuto dei file.
      */

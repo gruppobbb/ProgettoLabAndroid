@@ -32,7 +32,7 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     /**
      * Costruttore di un program per l'utilizzo di textures.
-     * @param context
+     * @param context Contesto
      */
     public CompleteShaderProgram(Context context){
         super(context, R.raw.diffuse_specular_vertex_shader, R.raw.diffuse_specular_fragment_shader);
@@ -57,7 +57,7 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     /**
      * @see ShaderProgram
-     * @param data
+     * @param data {@link ModelData}
      */
     @Override
     public void bindData(ModelData data) {
@@ -77,7 +77,7 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     /**
      * @see ShaderProgram
-     * @param mProjectionMatrix
+     * @param mProjectionMatrix Matrice di proiezione
      */
     @Override
     public void loadProjectionMatrix(float[] mProjectionMatrix) {
@@ -87,7 +87,7 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     /**
      * @see ShaderProgram
-     * @param mViewMatrix
+     * @param mViewMatrix View matrix
      */
     @Override
     public void loadViewMatrix(float[] mViewMatrix) {
@@ -107,7 +107,7 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     /**
      * @see ShaderProgram
-     * @param model
+     * @param model Modello 3D
      */
     @Override
     public void loadPerModelUniform(Model model){
@@ -132,7 +132,7 @@ public class CompleteShaderProgram extends ShaderProgram {
 
     /**
      * @see ShaderProgram
-     * @param modelMatrix
+     * @param modelMatrix Model matrix
      */
     @Override
     public void loadModelMatrix(float[] modelMatrix){

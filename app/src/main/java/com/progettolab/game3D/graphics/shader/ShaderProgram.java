@@ -31,7 +31,7 @@ public abstract class ShaderProgram {
     private int program;
 
     /**
-     * @param context
+     * @param context Contesto
      * @param vertexShaderResourceID ID della risorsa contenente il sorgente del vertex shader
      * @param fragmentShaderResourceID ID della risorsa contenente il sorgente del fragment shader
      */
@@ -46,7 +46,7 @@ public abstract class ShaderProgram {
 
     /**
      * Restituisce l'ID univoco del programma.
-     * @return
+     * @return ID univoco del programma
      */
     public int getProgramID() {
         return program;
@@ -54,31 +54,31 @@ public abstract class ShaderProgram {
 
     /**
      * Associazione dei dati tramite i reference agli uniform dello shader.
-     * @param data
+     * @param data {@link ModelData}
      */
     public abstract void bindData(ModelData data);
 
     /**
      * Caricamento in memoria della ProjectionMatrix.
-     * @param mProjectionMatrix
+     * @param mProjectionMatrix Matrice di proiezione
      */
     public abstract void loadProjectionMatrix(float[] mProjectionMatrix);
 
     /**
      * Caricamento in memoria della ViewMatrix.
-     * @param mViewMatrix
+     * @param mViewMatrix View matrix
      */
     public abstract void loadViewMatrix(float[] mViewMatrix);
 
     /**
      * Caricamento in memoria degli uniform specifici del modello.
-     * @param model
+     * @param model Modello 3D
      */
     public abstract void loadPerModelUniform(Model model);
 
     /**
      * Caricamento in memoria della sola ModelMatrix per un modello precaricato in memoria.
-     * @param modelMatrix
+     * @param modelMatrix Model matrix
      */
     public abstract void loadModelMatrix(float[] modelMatrix);
 

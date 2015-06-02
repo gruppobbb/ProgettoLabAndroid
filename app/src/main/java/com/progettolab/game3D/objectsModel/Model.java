@@ -58,8 +58,8 @@ public class Model {
     }
 
     /**
-     * Imposta l'id delle texture.
-     * @param texture
+     * Imposta la texture.
+     * @param texture ID della risorsa contenente la texture
      */
     public void setTexture(int texture) {
         this.texture = texture;

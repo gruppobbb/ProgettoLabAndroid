@@ -19,7 +19,7 @@ import javax.microedition.khronos.egl.EGLDisplay;
 public class GameSurface extends GLSurfaceView {
 
     /**
-     * @param context
+     * @param context Contesto
      */
     public GameSurface(Context context) {
         super(context);
@@ -27,8 +27,8 @@ public class GameSurface extends GLSurfaceView {
     }
 
     /**
-     * @param context
-     * @param attrs
+     * @param context Contesto
+     * @param attrs Attributi
      */
     public GameSurface(Context context, AttributeSet attrs) {
         super(context, attrs);

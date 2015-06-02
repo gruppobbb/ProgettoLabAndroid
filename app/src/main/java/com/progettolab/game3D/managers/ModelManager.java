@@ -17,7 +17,7 @@ public class ModelManager {
 
     /**
      * Restituisce l'istanza corrente di {@link ModelManager}
-     * @return
+     * @return Istanza del singleton ModelManager
      */
     public static ModelManager getInstance(){
         return manager;

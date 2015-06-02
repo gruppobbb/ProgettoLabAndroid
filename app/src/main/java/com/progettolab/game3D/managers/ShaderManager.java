@@ -137,8 +137,8 @@ public class ShaderManager {
     /**
      * Metodo per la verifica del file oggetto del programma contenente vertex e
      * fragment shader gia' linkati.
-     * @param programObjectID
-     * @return
+     * @param programObjectID ID del programma OpenGL
+     * @return true se la validazione ha avuto esito positivo, false altrimenti
      */
     public static boolean validateProgram(int programObjectID){
         GLES20.glValidateProgram(programObjectID);

@@ -45,7 +45,7 @@ public class GameMenu extends ActionBarActivity {
 
     /**
      * Gestisce la pressione dei bottoni.
-     * @param view
+     * @param view View nella quale deve essere gestito il controllo
      */
     public void handleButtonPress(View view){
 

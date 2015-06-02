@@ -17,7 +17,7 @@ public class ObjModelBuilder implements ModelBuilder {
     private TextureLoader textureLoader;
 
     /**
-     * @param context
+     * @param context Contesto
      */
     public ObjModelBuilder(Context context){
         loader = new ObjLoader(context);
@@ -26,7 +26,6 @@ public class ObjModelBuilder implements ModelBuilder {
 
     /**
      * @see ModelBuilder
-     * @param model
      */
     @Override
     public void buildModel(Model model) {
