@@ -169,7 +169,17 @@ public class GameActivity extends Activity implements Observer {
 
         finish();
 
+        //Questa chiamata viene fatta fuori dal main thread, quindi per tornare indietro
+        // serve "ritornare " nel main thread.
+        runOnUiThread(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                onBackPressed();
+            }
+        }));
+        /*
         Intent intent = new Intent(this, GameMenu.class);
         startActivity(intent);
+        */
     }
 }
