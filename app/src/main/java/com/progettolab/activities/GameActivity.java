@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.progettolab.game3D.audio.AudioManager;
 import com.progettolab.game3D.audio.AudioPlayer;
 import com.progettolab.game3D.control.FreeTouchController;
-import com.progettolab.game3D.engine.MoreDenseSpawnLogic;
+import com.progettolab.game3D.engine.GaussianSpawnLogic;
 import com.progettolab.game3D.entities.GameCamera;
 import com.progettolab.game3D.entities.Ship3D;
 import com.progettolab.game3D.graphics.core.GameRenderer;
@@ -111,7 +111,7 @@ public class GameActivity extends Activity implements Observer {
         mobsManager = new MobsManager();
 
         //SPAWNER
-        SpawnLogic spawnLogic = new MoreDenseSpawnLogic(ship, 6.0f, 3, -60f);
+        SpawnLogic spawnLogic = new GaussianSpawnLogic(ship, 5.0f, 4, -60f);
         spawner = new Spawner(mobsManager, spawnLogic);
         spawner.setSleepTime(500);
         spawnerThread = new Thread(spawner);

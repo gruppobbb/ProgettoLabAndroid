@@ -14,9 +14,9 @@ import model.spawning.SpawnLogic;
  * Logica di spawning che si basa sull'utilizzo di variabili casuali gaussiane per generare le coordinate dei nuovi mob.
  * Tali variabili sono centrate nei valori x e y della ship ed hanno una deviazione standard stdev specificata.
  */
-public class MoreDenseSpawnLogic implements SpawnLogic  {
+public class GaussianSpawnLogic implements SpawnLogic  {
 
-    public static final float MOB_MAX_SPEED = 0.6f;
+    public static final float MOB_MAX_SPEED = 0.8f;
     public static final float MOB_INITIAL_SPEED = 0.12f;
     public static final float MOB_SPEED_INCREMENT = 0.0001f;
     public static final double MOB_COLLISION_RAY = 0.5;
@@ -33,7 +33,7 @@ public class MoreDenseSpawnLogic implements SpawnLogic  {
      * @param simultaneousMobs Numero di mob che spawnano contemporaneamente a seguito di una chiamata a spawnMob()
      * @param initialZ Coordinata Z iniziale dei nuovi mob
      */
-    public MoreDenseSpawnLogic(Ship ship, float stdev, int simultaneousMobs, float initialZ) {
+    public GaussianSpawnLogic(Ship ship, float stdev, int simultaneousMobs, float initialZ) {
         this.ship = ship;
         this.stdev = stdev;
         this.simultaneousMobs = simultaneousMobs;
