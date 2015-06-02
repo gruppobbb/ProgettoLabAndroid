@@ -167,6 +167,8 @@ public class GameActivity extends Activity implements Observer {
         explosionPlayer.play();
         backgroundPlayer.stop();
 
+        gameEngine.getScoreCalculator().convalidateScore();
+
         finish();
 
         //Questa chiamata viene fatta fuori dal main thread, quindi per tornare indietro
