@@ -5,7 +5,7 @@
             android:layout_height="fill_parent"
             android:gravity="center_horizontal|bottom"
             android:padding="@dimen/activity_horizontal_margin"
-            tools:context="com.example.alessandro.computergraphicsexample.activities.GameMenu"
+            tools:context="com.example.alessandro.progettolab.activities.GameMenu"
     android:background="@drawable/blue_space">
 
     <Button
