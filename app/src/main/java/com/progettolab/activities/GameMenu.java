@@ -40,7 +40,6 @@ public class GameMenu extends ActionBarActivity {
 
         setContentView(R.layout.activity_game_menu);
 
-        initAudio();
 
         //Setting di una GLSurfaceView in overlay
         menuSurface = new MenuSurface(this);
@@ -80,9 +79,9 @@ public class GameMenu extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        initAudio();
         titlePlayer.play();
         menuSurface.onResume();
-
     }
 
     @Override

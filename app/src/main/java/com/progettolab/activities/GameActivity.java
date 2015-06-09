@@ -166,6 +166,7 @@ public class GameActivity extends Activity implements Observer {
     public void update(Observable observable, Object data) {
 
         explosionPlayer.play();
+        surface.setFocusable(false);
         backgroundPlayer.stop();
 
         gameEngine.getScoreCalculator().convalidateScore();
