@@ -159,6 +159,7 @@ public class GameActivity extends Activity implements Observer {
         spawner.setToKill(true);
         gameEngine.setToKill(true);
         backgroundPlayer.stop();
+        //Intent intent = new Intent(this, ScoreActivity.class);
     }
 
     @Override

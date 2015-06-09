@@ -9,9 +9,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.progettolab.R;
+import com.progettolab.game3D.audio.AudioManager;
+import com.progettolab.game3D.audio.AudioPlayer;
 import com.progettolab.game3D.graphics.core.MenuRenderer;
 import com.progettolab.game3D.graphics.core.MenuSurface;
 import com.progettolab.game3D.managers.ScreenManager;
+
+import model.scores.LocalScoreManager;
+import model.scores.ManagerKeeper;
+import model.scores.ScoreKeeper;
+import model.scores.XMLLocalStatsManager;
 
 
 /**
@@ -21,6 +28,8 @@ import com.progettolab.game3D.managers.ScreenManager;
 public class GameMenu extends ActionBarActivity {
 
     private MenuSurface menuSurface;
+    private AudioPlayer confirmPlayer;
+    private AudioPlayer titlePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,8 @@ public class GameMenu extends ActionBarActivity {
         ScreenManager.goFullScreen(this);
 
         setContentView(R.layout.activity_game_menu);
+
+        initAudio();
 
         //Setting di una GLSurfaceView in overlay
         menuSurface = new MenuSurface(this);
@@ -41,6 +52,9 @@ public class GameMenu extends ActionBarActivity {
         Button button = (Button)findViewById(R.id.new_game_button);
         Typeface font = Typeface.createFromAsset(getAssets(), getString(R.string.button_font));
         button.setTypeface(font);
+
+        //ManagerKeeper.getInstance().setLocalStats(new XMLLocalStatsManager(getString(R.raw.)));
+        //ManagerKeeper.getInstance().setScoreManager(new LocalScoreManager(""));
     }
 
     /**
@@ -52,6 +66,8 @@ public class GameMenu extends ActionBarActivity {
         Intent intent;
         switch (view.getId()) {
             case R.id.new_game_button:
+                titlePlayer.stop();
+                confirmPlayer.play();
                 intent = new Intent(this, GameActivity.class);
                 break;
             default: return;
@@ -64,6 +80,7 @@ public class GameMenu extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        titlePlayer.play();
         menuSurface.onResume();
 
     }
@@ -71,6 +88,16 @@ public class GameMenu extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        titlePlayer.pause();
         menuSurface.onPause();
     }
+
+    private void initAudio() {
+        AudioManager.getInstance().addResource("Confirm_sound", R.raw.confirm);
+        AudioManager.getInstance().addResource("Title_sound", R.raw.title);
+
+        confirmPlayer = new AudioPlayer(this, "Confirm_sound", false);
+        titlePlayer = new AudioPlayer(this, "Title_sound", true);
+    }
+
 }

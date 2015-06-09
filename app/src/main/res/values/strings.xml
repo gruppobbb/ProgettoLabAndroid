@@ -5,5 +5,9 @@
     <string name="title_activity_game_menu">GameMenu</string>
     <string name="title_activity_new_version">NewVersionActivity</string>
     <string name="new_game_button">New Game</string>
+    <string name="title_activity_score">ScoreActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
